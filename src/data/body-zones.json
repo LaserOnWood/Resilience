@@ -17,10 +17,50 @@
   },
   {
     "id": "zone-3",
-    "name": "Haut du dos",
+    "name": "Poitrine",
     "category": "body-zone",
     "description": "Zone proposée, uniquement avec accord explicite.",
     "image": "",
-    "value": "Haut du dos"
+    "value": "Poitrine"
+  },
+  {
+    "id": "zone-4",
+    "name": "Dos",
+    "category": "body-zone",
+    "description": "Zone proposée, uniquement avec accord explicite.",
+    "image": "",
+    "value": "Dos"
+  },
+  {
+    "id": "zone-5",
+    "name": "Sexe",
+    "category": "body-zone",
+    "description": "Zone proposée, uniquement avec accord explicite.",
+    "image": "",
+    "value": "Sexe"
+  },
+  {
+    "id": "zone-6",
+    "name": "Fesses",
+    "category": "body-zone",
+    "description": "Zone proposée, uniquement avec accord explicite.",
+    "image": "",
+    "value": "Fesses"
+  },
+  {
+    "id": "zone-7",
+    "name": "Cuisses",
+    "category": "body-zone",
+    "description": "Zone proposée, uniquement avec accord explicite.",
+    "image": "",
+    "value": "Cuisses"
+  },
+  {
+    "id": "zone-8",
+    "name": "Pied",
+    "category": "body-zone",
+    "description": "Zone proposée, uniquement avec accord explicite.",
+    "image": "",
+    "value": "Pied"
   }
 ]

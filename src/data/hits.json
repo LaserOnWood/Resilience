@@ -9,30 +9,6 @@
   },
   {
     "id": "hits-2",
-    "name": "2 coups",
-    "category": "hits",
-    "description": "Valeur indicative à adapter librement.",
-    "image": "",
-    "value": 2
-  },
-  {
-    "id": "hits-3",
-    "name": "3 coups",
-    "category": "hits",
-    "description": "Valeur indicative à adapter librement.",
-    "image": "",
-    "value": 3
-  },
-  {
-    "id": "hits-4",
-    "name": "4 coups",
-    "category": "hits",
-    "description": "Valeur indicative à adapter librement.",
-    "image": "",
-    "value": 4
-  },
-  {
-    "id": "hits-5",
     "name": "5 coups",
     "category": "hits",
     "description": "Valeur indicative à adapter librement.",
@@ -40,43 +16,51 @@
     "value": 5
   },
   {
-    "id": "hits-6",
-    "name": "6 coups",
+    "id": "hits-3",
+    "name": "15 coups",
     "category": "hits",
     "description": "Valeur indicative à adapter librement.",
     "image": "",
-    "value": 6
+    "value": 15
+  },
+  {
+    "id": "hits-4",
+    "name": "25 coups",
+    "category": "hits",
+    "description": "Valeur indicative à adapter librement.",
+    "image": "",
+    "value": 25
+  },
+  {
+    "id": "hits-5",
+    "name": "50 coups",
+    "category": "hits",
+    "description": "Valeur indicative à adapter librement.",
+    "image": "",
+    "value": 5
+  },
+  {
+    "id": "hits-6",
+    "name": "75 coups",
+    "category": "hits",
+    "description": "Valeur indicative à adapter librement.",
+    "image": "",
+    "value": 75
   },
   {
     "id": "hits-7",
-    "name": "7 coups",
+    "name": "100 coups",
     "category": "hits",
     "description": "Valeur indicative à adapter librement.",
     "image": "",
-    "value": 7
+    "value": 100
   },
   {
     "id": "hits-8",
-    "name": "8 coups",
+    "name": "150 coups",
     "category": "hits",
     "description": "Valeur indicative à adapter librement.",
     "image": "",
-    "value": 8
-  },
-  {
-    "id": "hits-9",
-    "name": "9 coups",
-    "category": "hits",
-    "description": "Valeur indicative à adapter librement.",
-    "image": "",
-    "value": 9
-  },
-  {
-    "id": "hits-10",
-    "name": "10 coups",
-    "category": "hits",
-    "description": "Valeur indicative à adapter librement.",
-    "image": "",
-    "value": 10
+    "value": 150
   }
 ]

@@ -14,5 +14,37 @@
     "description": "Proposition facultative, à adapter ensemble.",
     "image": "",
     "value": "Accessoire à définir ensemble"
+  },
+  {
+    "id": "accessory-3",
+    "name": "Canne",
+    "category": "accessory",
+    "description": "Proposition facultative, à adapter ensemble.",
+    "image": "",
+    "value": "Canne"
+  },
+  {
+    "id": "accessory-4",
+    "name": "Paddle",
+    "category": "accessory",
+    "description": "Proposition facultative, à adapter ensemble.",
+    "image": "",
+    "value": "Paddle"
+  },
+  {
+    "id": "accessory-5",
+    "name": "Martinet",
+    "category": "accessory",
+    "description": "Proposition facultative, à adapter ensemble.",
+    "image": "",
+    "value": "Martinet"
+  },
+  {
+    "id": "accessory-6",
+    "name": "Fouet",
+    "category": "accessory",
+    "description": "Proposition facultative, à adapter ensemble.",
+    "image": "",
+    "value": "Fouet"
   }
 ]
