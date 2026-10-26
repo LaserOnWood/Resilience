@@ -1,0 +1,18 @@
+[
+  {
+    "id": "accessory-1",
+    "name": "Sans accessoire",
+    "category": "accessory",
+    "description": "Proposition facultative, à adapter ensemble.",
+    "image": "",
+    "value": "Sans accessoire"
+  },
+  {
+    "id": "accessory-2",
+    "name": "Accessoire à définir ensemble",
+    "category": "accessory",
+    "description": "Proposition facultative, à adapter ensemble.",
+    "image": "",
+    "value": "Accessoire à définir ensemble"
+  }
+]

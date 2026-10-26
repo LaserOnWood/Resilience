@@ -1,0 +1,26 @@
+[
+  {
+    "id": "zone-1",
+    "name": "Paume de la main",
+    "category": "body-zone",
+    "description": "Zone proposée, uniquement avec accord explicite.",
+    "image": "",
+    "value": "Paume de la main"
+  },
+  {
+    "id": "zone-2",
+    "name": "Avant-bras",
+    "category": "body-zone",
+    "description": "Zone proposée, uniquement avec accord explicite.",
+    "image": "",
+    "value": "Avant-bras"
+  },
+  {
+    "id": "zone-3",
+    "name": "Haut du dos",
+    "category": "body-zone",
+    "description": "Zone proposée, uniquement avec accord explicite.",
+    "image": "",
+    "value": "Haut du dos"
+  }
+]
