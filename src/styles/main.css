@@ -1,9 +1,17 @@
 
 :root {
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif;
-  color: #f6e8eb;
+  color: #f3e7d5;
   background: #09070c;
   font-synthesis: none;
+
+  --gold: #c7a66b;
+  --gold-light: #f0d8a0;
+  --gold-dark: #76552f;
+  --burgundy: #481526;
+  --ruby: #a3284b;
+  --ivory: #f3e7d5;
+  --plum: #170d14;
 }
 
 * {
@@ -42,6 +50,12 @@ button:hover:not(:disabled) {
 button:disabled {
   opacity: 0.55;
   cursor: not-allowed;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid var(--gold-light);
+  outline-offset: 4px;
 }
 
 /* Boutons secondaires et navigation */
@@ -142,9 +156,11 @@ small {
   line-height: 1.5;
 }
 
-/* Illustration du booster */
+/* Illustration provisoire du booster */
 
 .packet {
+  position: relative;
+  isolation: isolate;
   display: grid;
   width: 150px;
   height: 210px;
@@ -163,32 +179,32 @@ small {
 .cards {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1rem;
+  gap: clamp(0.5rem, 2vw, 1.25rem);
   margin: 2rem 0;
+  align-items: start;
 }
 
+/* Structure des cartes */
+
 .game-card {
-  display: flex;
+  display: block;
+  width: 100%;
   min-width: 0;
-  min-height: 230px;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  padding: 1rem;
+  aspect-ratio: 5 / 7;
+  padding: 0;
   overflow: visible;
-  border: 2px solid #ba7890;
-  border-radius: 0.7rem;
-  background: linear-gradient(140deg, #431729, #140b18);
-  perspective: 1000px;
-  transition:
-    transform 0.2s,
-    border-color 0.2s,
-    box-shadow 0.2s;
+  border: 0;
+  border-radius: 0.85rem;
+  background: transparent;
+  color: var(--ivory);
+  perspective: 1200px;
+  text-align: center;
+  transition: transform 250ms ease;
 }
 
 .game-card:not(:disabled):hover {
   transform: translateY(-8px);
+  background: transparent;
 }
 
 .game-card:disabled.face-up {
@@ -200,23 +216,14 @@ small {
   transform: none;
 }
 
-.game-card span {
-  font-size: clamp(1.2rem, 3vw, 2rem);
-}
-
-.game-card small {
-  margin: 0;
-}
-
-/* Animation de retournement */
-
 .card-inner {
   position: relative;
   display: block;
   width: 100%;
-  min-height: 190px;
+  height: 100%;
+  border-radius: inherit;
   transform-style: preserve-3d;
-  transition: transform 650ms cubic-bezier(0.2, 0.75, 0.25, 1);
+  transition: transform 750ms cubic-bezier(0.2, 0.75, 0.25, 1);
 }
 
 .game-card.face-up .card-inner {
@@ -226,39 +233,258 @@ small {
 .card-face {
   position: absolute;
   inset: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  padding: 0.5rem;
-  overflow-wrap: anywhere;
-  border-radius: 0.4rem;
+  display: block;
+  padding: 5px;
+  overflow: hidden;
+  border: 1px solid var(--gold);
+  border-radius: inherit;
+  box-shadow:
+    0 14px 30px #0009,
+    inset 0 0 0 2px #26151a;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
 
-.card-back {
-  background: linear-gradient(145deg, #512039, #180c20);
-  color: #f6e8eb;
+.card-frame {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  flex-direction: column;
+  align-items: center;
+  padding: clamp(0.35rem, 1.4vw, 0.9rem);
+  overflow: hidden;
+  border: 1px solid #c7a66b99;
+  border-radius: 0.55rem;
 }
 
-.card-symbol {
-  font-size: 3rem;
+.card-frame::before,
+.card-frame::after {
+  position: absolute;
+  z-index: 1;
+  color: var(--gold);
+  font-family: Georgia, serif;
+  font-size: clamp(0.8rem, 2vw, 1.4rem);
+  line-height: 1;
+  pointer-events: none;
 }
+
+.card-frame::before {
+  content: "❧";
+  top: 3px;
+  left: 5px;
+}
+
+.card-frame::after {
+  content: "❧";
+  right: 5px;
+  bottom: 3px;
+  transform: rotate(180deg);
+}
+
+/* Dos commun */
+
+.card-back {
+  background:
+    radial-gradient(circle at 50% 45%, #74334b 0%, transparent 48%),
+    linear-gradient(145deg, #451b2c, #170d14 72%);
+}
+
+.card-back .card-frame {
+  justify-content: space-between;
+  background:
+    repeating-linear-gradient(
+      45deg,
+      transparent 0,
+      transparent 11px,
+      #c7a66b09 12px,
+      transparent 13px
+    );
+}
+
+.card-back-top,
+.card-back-bottom {
+  color: var(--gold-light);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(0.42rem, 0.8vw, 0.7rem);
+  letter-spacing: 0.15em;
+  text-align: center;
+}
+
+.card-back-center {
+  display: flex;
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.2rem, 1vw, 0.7rem);
+}
+
+.card-back-ornament {
+  color: var(--gold);
+  font-family: Georgia, serif;
+  font-size: clamp(0.9rem, 2.5vw, 1.8rem);
+}
+
+.card-back-emblem {
+  display: grid;
+  width: clamp(2.5rem, 7vw, 5.5rem);
+  aspect-ratio: 1;
+  place-items: center;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  background: radial-gradient(circle, #7c3c50, #270f1b);
+  box-shadow:
+    0 0 0 5px #c7a66b1c,
+    0 0 25px #c7a66b33;
+  color: var(--gold-light);
+  font-size: clamp(1.3rem, 4vw, 3rem);
+}
+
+.card-back-title {
+  max-width: 100%;
+  color: var(--gold-light);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(0.6rem, 1.7vw, 1.3rem);
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  overflow-wrap: anywhere;
+  text-shadow: 0 2px 8px #000;
+}
+
+/* Face avant */
 
 .card-front {
   transform: rotateY(180deg);
-  background: linear-gradient(145deg, #422331, #241522);
+  background:
+    radial-gradient(circle at 50% 38%, #57263a 0%, transparent 58%),
+    linear-gradient(155deg, #361b28, #110c13);
+}
+
+.card-front .card-frame {
+  justify-content: space-between;
+  gap: 0.35rem;
+  background: linear-gradient(145deg, #ffffff04, #00000022);
+}
+
+.card-front-heading {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  gap: 0.25rem;
+  align-items: center;
+  padding: 0 0.3rem 0.45rem;
+  border-bottom: 1px solid #c7a66b80;
+}
+
+.card-category,
+.card-index {
+  color: var(--gold-light);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(0.55rem, 1.2vw, 0.85rem);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.card-artwork {
+  display: flex;
+  width: 100%;
+  min-height: 0;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(0.2rem, 1vw, 0.7rem);
+  padding: 0.3rem 0;
+}
+
+.card-artwork-ornament {
+  color: var(--gold);
+  font-family: Georgia, serif;
+  font-size: clamp(0.85rem, 2.5vw, 1.7rem);
+  line-height: 1;
 }
 
 .card-name {
-  font-size: clamp(1rem, 2.5vw, 1.5rem);
-  font-weight: 800;
+  display: block;
+  width: 100%;
+  color: var(--ivory);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(0.9rem, 2.4vw, 1.9rem);
+  font-weight: 700;
+  line-height: 1.12;
+  overflow-wrap: anywhere;
+  text-shadow: 0 2px 12px #000;
 }
 
-.card-face small {
-  margin: 0;
+.card-description {
+  display: -webkit-box;
+  width: 100%;
+  max-height: 30%;
+  overflow: auto;
+  color: #e4d2c8;
+  font-size: clamp(0.6rem, 1.2vw, 0.85rem);
+  font-weight: 400;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+  scrollbar-width: thin;
+}
+
+.card-front-footer {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.2rem;
+  padding-top: 0.4rem;
+  border-top: 1px solid #c7a66b80;
+  color: var(--gold);
+  font-family: Georgia, serif;
+  font-size: clamp(0.5rem, 1vw, 0.7rem);
+  letter-spacing: 0.08em;
+}
+
+/* Personnalisation par catégorie */
+
+.card-number .card-name {
+  color: var(--gold-light);
+  font-size: clamp(1.8rem, 5vw, 4rem);
+}
+
+.card-number .card-artwork {
+  background: radial-gradient(
+    ellipse at center,
+    #c7a66b16,
+    transparent 65%
+  );
+}
+
+.card-zone .card-artwork {
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    #a3284b38,
+    transparent 70%
+  );
+}
+
+.card-zone .card-name {
+  color: #f8e6de;
+}
+
+.card-accessory .card-artwork {
+  background: radial-gradient(
+    ellipse at center,
+    #c7a66b1f,
+    transparent 68%
+  );
+}
+
+.card-accessory .card-name {
+  color: #f0d8a0;
 }
 
 /* Progression des révélations */
@@ -311,62 +537,7 @@ footer {
   text-align: center;
 }
 
-/* Adaptation mobile */
-
-@media (max-width: 540px) {
-  .cards {
-    gap: 0.45rem;
-  }
-
-  .game-card {
-    min-height: 170px;
-    padding: 0.45rem;
-  }
-
-  .card-inner {
-    min-height: 140px;
-  }
-
-  .card-face {
-    gap: 0.5rem;
-    padding: 0.25rem;
-  }
-
-  .card-symbol {
-    font-size: 2rem;
-  }
-
-  .game-card small {
-    font-size: 0.7rem;
-  }
-
-  .top {
-    gap: 1rem;
-  }
-}
-
-/* Respect des préférences de réduction des animations */
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
-  }
-
-  .card-inner {
-    transition: none;
-  }
-}
-
-
-/* Animation d'ouverture du booster */
-
-.packet {
-  position: relative;
-  isolation: isolate;
-}
+/* Animation d'ouverture du booster - conservée */
 
 .packet.opening {
   animation: packet-opening 1.2s cubic-bezier(0.2, 0.75, 0.25, 1) forwards;
@@ -454,5 +625,87 @@ footer {
   100% {
     opacity: 0;
     transform: translate(28px, 40px) scale(1.4);
+  }
+}
+
+/* Adaptation mobile */
+
+@media (max-width: 540px) {
+  .cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+
+  .game-card:last-child {
+    grid-column: 1 / -1;
+    width: calc((100% - 0.75rem) / 2);
+    justify-self: center;
+  }
+
+  .card-frame {
+    padding: 0.5rem;
+  }
+
+  .card-back-top,
+  .card-back-bottom {
+    font-size: 0.55rem;
+  }
+
+  .card-back-title {
+    font-size: clamp(0.7rem, 3vw, 1rem);
+  }
+
+  .card-name {
+    font-size: clamp(1rem, 3.5vw, 1.4rem);
+  }
+
+  .card-number .card-name {
+    font-size: clamp(2rem, 8vw, 3rem);
+  }
+
+  .card-description {
+    font-size: clamp(0.62rem, 2.3vw, 0.8rem);
+  }
+
+  .card-category,
+  .card-index {
+    font-size: 0.6rem;
+  }
+
+  .top {
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 370px) {
+  .cards {
+    gap: 0.45rem;
+  }
+
+  .game-card:last-child {
+    width: calc((100% - 0.45rem) / 2);
+  }
+
+  .card-frame {
+    padding: 0.3rem;
+  }
+
+  .card-front-footer {
+    letter-spacing: 0;
+  }
+}
+
+/* Réduction des animations */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .card-inner {
+    transition: none;
   }
 }
