@@ -28,6 +28,26 @@ function getCardPresentation(card: Card) {
   }
 }
 
+
+function getCardNameStyle(name: string): React.CSSProperties {
+  const length = name.length;
+
+  if (length > 28) {
+    return { fontSize: 'clamp(0.8rem, 2.5vw, 1.1rem)' };
+  }
+
+  if (length > 22) {
+    return { fontSize: 'clamp(0.9rem, 3vw, 1.3rem)' };
+  }
+
+  if (length > 16) {
+    return { fontSize: 'clamp(1rem, 3.5vw, 1.6rem)' };
+  }
+
+  return {};
+}
+
+
 export default function App() {
   const [adult, setAdult] = useState(
     () => sessionStorage.getItem('resilience-adult') === 'yes',
@@ -232,7 +252,11 @@ export default function App() {
                           <span className="card-artwork-ornament">
                             {presentation.ornament}
                           </span>
-                          <span className="card-name">{card.name}</span>
+                          
+                          <span className="card-name" style={getCardNameStyle(card.name)}>
+                            {card.name}
+                          </span>
+
                           <span className="card-artwork-ornament">
                             {presentation.ornament}
                           </span>
