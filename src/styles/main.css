@@ -449,9 +449,14 @@ small {
 
 /* Personnalisation par catégorie */
 
+.card-number .card-name,
+.card-zone .card-name,
+.card-accessory .card-name {
+  font-size: clamp(1.8rem, 5vw, 4rem);
+}
+
 .card-number .card-name {
   color: var(--gold-light);
-  font-size: clamp(1.8rem, 5vw, 4rem);
 }
 
 .card-number .card-artwork {
@@ -659,9 +664,11 @@ footer {
     font-size: clamp(1rem, 3.5vw, 1.4rem);
   }
 
-  .card-number .card-name {
+  .card-number .card-name,
+  .card-zone .card-name,
+  .card-accessory .card-name {
     font-size: clamp(2rem, 8vw, 3rem);
-  }
+}
 
   .card-description {
     font-size: clamp(0.62rem, 2.3vw, 0.8rem);
