@@ -173,7 +173,11 @@ export default function App() {
               }
             }}
           >
-            K<br />✦
+            <span className="packet-emblem" aria-hidden="true">
+              ✦
+            </span>
+            <span className="packet-brand">RÉSILIENCE</span>
+            <span className="packet-edition">ÉDITION COLLECTOR</span>
           </div>
 
           <h1>{opening ? 'Le booster s’ouvre…' : 'Votre booster attend'}</h1>
