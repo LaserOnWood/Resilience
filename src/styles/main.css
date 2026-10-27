@@ -477,7 +477,7 @@ small {
 }
 
 .card-zone .card-name {
-  color: #f8e6de;
+  color: var(--gold-light);
 }
 
 .card-accessory .card-artwork {
@@ -489,7 +489,7 @@ small {
 }
 
 .card-accessory .card-name {
-  color: #f0d8a0;
+  color: var(--gold-light);
 }
 
 /* Progression des révélations */
