@@ -452,7 +452,7 @@ small {
 .card-number .card-name,
 .card-zone .card-name,
 .card-accessory .card-name {
-  font-size: clamp(1.8rem, 5vw, 4rem);
+  font-size: clamp(1rem, 3vw, 2rem);
 }
 
 .card-number .card-name {
@@ -667,8 +667,8 @@ footer {
   .card-number .card-name,
   .card-zone .card-name,
   .card-accessory .card-name {
-    font-size: clamp(2rem, 8vw, 3rem);
-}
+  font-size: clamp(1rem, 5vw, 1.6rem);
+  }
 
   .card-description {
     font-size: clamp(0.62rem, 2.3vw, 0.8rem);
