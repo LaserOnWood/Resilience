@@ -1,9 +1,32 @@
 
 import { useState } from 'react';
 import { createDraw, drawToken } from './lib/game';
-import type { Draw } from './types/game';
+import type { Draw, Card } from './types/game';
 
 type Screen = 'welcome' | 'rules' | 'booster' | 'reveal' | 'summary';
+
+function getCardPresentation(card: Card) {
+  switch (card.category) {
+    case 'hits':
+      return {
+        category: 'Nombre',
+        ornament: '✧',
+        className: 'card-number',
+      };
+    case 'body-zone':
+      return {
+        category: 'Zone',
+        ornament: '◇',
+        className: 'card-zone',
+      };
+    case 'accessory':
+      return {
+        category: 'Accessoire',
+        ornament: '✦',
+        className: 'card-accessory',
+      };
+  }
+}
 
 export default function App() {
   const [adult, setAdult] = useState(
@@ -23,7 +46,6 @@ export default function App() {
     setTokenVisible(false);
     setOpening(true);
   };
-
 
   const revealCard = (index: number) => {
     setRevealed(old =>
@@ -115,38 +137,38 @@ export default function App() {
         </section>
       )}
 
-      
       {screen === 'booster' && (
         <section className="panel hero">
           <p className="eyebrow">Prototype interactif</p>
-          
+
           <div
-          className={`packet${opening ? ' opening' : ''}`}
-          aria-hidden="true"
-          onAnimationEnd={() => {
-            if (opening) {
-              setOpening(false);
-              setScreen('reveal');
-            }
-          }}
+            className={`packet${opening ? ' opening' : ''}`}
+            aria-hidden="true"
+            onAnimationEnd={event => {
+              if (event.target !== event.currentTarget) return;
+
+              if (opening) {
+                setOpening(false);
+                setScreen('reveal');
+              }
+            }}
           >
             K<br />✦
           </div>
 
           <h1>{opening ? 'Le booster s’ouvre…' : 'Votre booster attend'}</h1>
-          
+
           <button onClick={start} disabled={opening}>
             {opening ? 'Ouverture en cours…' : 'Ouvrir le booster'}
           </button>
-          
+
           <small>
             {opening
-            ? 'Préparez-vous à découvrir vos cartes.'
-            : 'Trois cartes vous attendent à l’intérieur.'}
+              ? 'Préparez-vous à découvrir vos cartes.'
+              : 'Trois cartes vous attendent à l’intérieur.'}
           </small>
         </section>
       )}
-
 
       {screen === 'reveal' && draw && (
         <section className="panel wide">
@@ -162,13 +184,13 @@ export default function App() {
           <div className="cards">
             {draw.cards.map((card, i) => {
               const isRevealed = revealed.includes(i);
+              const presentation = getCardPresentation(card);
 
               return (
                 <button
                   key={card.id}
-                  className={
-                    'game-card' + (isRevealed ? ' face-up' : '')
-                  }
+                  type="button"
+                  className={`game-card ${presentation.className}${isRevealed ? ' face-up' : ''}`}
                   onClick={() => revealCard(i)}
                   disabled={isRevealed}
                   aria-label={
@@ -179,12 +201,53 @@ export default function App() {
                 >
                   <span className="card-inner">
                     <span className="card-face card-back" aria-hidden="true">
-                      <span className="card-symbol">✦</span>
-                      <small>Carte {i + 1}</small>
+                      <span className="card-frame">
+                        <span className="card-back-top">COLLECTION PRIVÉE</span>
+
+                        <span className="card-back-center">
+                          <span className="card-back-ornament">✧</span>
+                          <span className="card-back-emblem">✦</span>
+                          <span className="card-back-title">RÉSILIENCE</span>
+                          <span className="card-back-ornament">✧</span>
+                        </span>
+
+                        <span className="card-back-bottom">
+                          ÉDITION OR ANCIEN
+                        </span>
+                      </span>
                     </span>
+
                     <span className="card-face card-front">
-                      <span className="card-name">{card.name}</span>
-                      <small>{card.description}</small>
+                      <span className="card-frame">
+                        <span className="card-front-heading">
+                          <span className="card-category">
+                            {presentation.category}
+                          </span>
+                          <span className="card-index">
+                            {String(i + 1).padStart(2, '0')}
+                          </span>
+                        </span>
+
+                        <span className="card-artwork">
+                          <span className="card-artwork-ornament">
+                            {presentation.ornament}
+                          </span>
+                          <span className="card-name">{card.name}</span>
+                          <span className="card-artwork-ornament">
+                            {presentation.ornament}
+                          </span>
+                        </span>
+
+                        <span className="card-description">
+                          {card.description}
+                        </span>
+
+                        <span className="card-front-footer">
+                          <span>✦</span>
+                          <span>RÉSILIENCE</span>
+                          <span>✦</span>
+                        </span>
+                      </span>
                     </span>
                   </span>
                 </button>
