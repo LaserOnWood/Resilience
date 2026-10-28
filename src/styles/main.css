@@ -206,6 +206,14 @@ small {
   text-shadow: 0 0 14px #c7a66b55;
 }
 
+.packet-emblem-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 50%;
+}
+
 /* Nom de la marque */
 .packet-brand {
   color: #f3e7d5;
@@ -255,6 +263,47 @@ small {
   pointer-events: none;
 }
 
+
+/* Logo officiel sur l'écran d'accueil */
+
+.welcome-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 0.5rem auto 1.5rem;
+  padding: 0;
+  line-height: 1;
+}
+
+.welcome-logo-image {
+  display: block;
+  width: min(100%, 440px);
+  height: auto;
+  object-fit: contain;
+
+  filter: drop-shadow(0 0 16px #c7a66b25);
+
+  animation: welcome-logo-appear 1.2s ease-out both;
+}
+
+@keyframes welcome-logo-appear {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .welcome-logo-image {
+    animation: none;
+  }
+}
 
 /* Grille des cartes */
 
