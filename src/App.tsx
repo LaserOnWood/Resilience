@@ -176,7 +176,7 @@ export default function App() {
             }}
           >
             <span className="packet-emblem" aria-hidden="true">
-              <img src="/images/branding/embleme-resilience.png" alt="" className="packet-emblem-image" />
+              <img src="/images/branding/embleme-resilience-transparent.png" alt="" className="packet-emblem-image" />
             </span>
             <span className="packet-brand">RÉSILIENCE</span>
             <span className="packet-edition">ÉDITION COLLECTOR</span>

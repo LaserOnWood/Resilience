@@ -211,7 +211,7 @@ small {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  border-radius: 50%;
+  filter: drop-shadow(0 0 12px #c7a66b55);
 }
 
 /* Nom de la marque */
