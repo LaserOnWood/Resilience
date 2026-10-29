@@ -237,21 +237,41 @@ small {
   white-space: nowrap;
 }
 
-/* Reflet métallique */
+
+/* Texture et plis métalliques du booster */
+
 .packet::before {
   content: "";
   position: absolute;
   z-index: -1;
   inset: 0;
   pointer-events: none;
-  background: linear-gradient(
-    110deg,
-    transparent 15%,
-    #ffffff0b 35%,
-    #ffffff18 43%,
-    transparent 55%
-  );
+
+  background:
+    linear-gradient(
+      102deg,
+      transparent 8%,
+      #ffffff13 13%,
+      transparent 18%,
+      #00000025 23%,
+      transparent 29%
+    ),
+    linear-gradient(
+      78deg,
+      transparent 68%,
+      #ffffff12 74%,
+      #00000030 79%,
+      transparent 85%
+    ),
+    linear-gradient(
+      110deg,
+      transparent 20%,
+      #ffffff0b 38%,
+      #ffffff1c 44%,
+      transparent 52%
+    );
 }
+
 
 /* Soudures décoratives du sachet */
 .packet::after {
@@ -740,6 +760,54 @@ footer {
   font-size: 0.8rem;
   text-align: center;
 }
+
+
+/* Finitions métalliques du booster collector */
+
+.packet {
+  background:
+    /* Soudures horizontales */
+    repeating-linear-gradient(
+      90deg,
+      #c7a66b35 0px,
+      #ffffff12 2px,
+      #170d1440 4px,
+      #c7a66b35 6px
+    ) top / 100% 10px no-repeat,
+
+    repeating-linear-gradient(
+      90deg,
+      #c7a66b35 0px,
+      #ffffff12 2px,
+      #170d1440 4px,
+      #c7a66b35 6px
+    ) bottom / 100% 10px no-repeat,
+
+    /* Reflets du sachet */
+    linear-gradient(
+      115deg,
+      transparent 15%,
+      #ffffff0c 28%,
+      transparent 42%
+    ),
+
+    /* Fond métallisé */
+    linear-gradient(
+      135deg,
+      #59172c 0%,
+      #260d19 35%,
+      #491326 62%,
+      #170b13 100%
+    );
+
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% 100%,
+    0 100%
+  );
+}
+
 
 /* Animation d'ouverture du booster - conservée */
 
