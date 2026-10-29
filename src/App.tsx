@@ -119,7 +119,7 @@ export default function App() {
         <section className="panel hero">
           <p className="eyebrow">Une expérience de cartes à partager</p>
           <h1 className="welcome-logo">
-            <img src="/images/branding/logo-resilience.png" alt="Résilience" className="welcome-logo-image"/>
+            <img src="/images/branding/logo-resilience-transparent.png" alt="Résilience" className="welcome-logo-image"/>
           </h1>
           <p className="tagline">
             Ouvrir un paquet de cartes ne vous procurera jamais autant de
