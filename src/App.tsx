@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { createDraw, drawToken } from './lib/game';
 import type { Draw, Card } from './types/game';
 
-type Screen = 'welcome' | 'rules' | 'booster' | 'reveal' | 'summary';
+type Screen = 'welcome' | 'rules' | 'booster' | 'reveal' | 'summary' | 'history';
 
 function getCardPresentation(card: Card) {
   switch (card.category) {
@@ -226,7 +226,7 @@ export default function App() {
               : `${revealed.length} carte${revealed.length > 1 ? 's' : ''} sur 3 révélée${revealed.length > 1 ? 's' : ''}. Choisissez la prochaine !`}
           </p>
 
-          <div className="cards">
+          <div className="cards cards-emergence">
             {draw.cards.map((card, i) => {
               const isRevealed = revealed.includes(i);
               const presentation = getCardPresentation(card);
