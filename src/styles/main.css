@@ -468,20 +468,38 @@ small {
   font-size: clamp(0.9rem, 2.5vw, 1.8rem);
 }
 
+
+/* Emblème officiel au dos des cartes */
+
 .card-back-emblem {
   display: grid;
-  width: clamp(2.5rem, 7vw, 5.5rem);
+  width: clamp(3.5rem, 10vw, 7rem);
+  max-width: 85%;
   aspect-ratio: 1;
   place-items: center;
-  border: 1px solid var(--gold);
-  border-radius: 50%;
-  background: radial-gradient(circle, #7c3c50, #270f1b);
-  box-shadow:
-    0 0 0 5px #c7a66b1c,
-    0 0 25px #c7a66b33;
-  color: var(--gold-light);
-  font-size: clamp(1.3rem, 4vw, 3rem);
+  flex-shrink: 0;
 }
+
+.card-back-emblem-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+
+  filter: drop-shadow(0 0 12px #c7a66b55);
+
+  transition:
+    transform 350ms ease,
+    filter 350ms ease;
+}
+
+/* Léger éclat lorsque la carte est survolée */
+
+.game-card:not(:disabled):hover .card-back-emblem-image {
+  transform: scale(1.06);
+  filter: drop-shadow(0 0 18px #f0d8a088);
+}
+
 
 .card-back-title {
   max-width: 100%;

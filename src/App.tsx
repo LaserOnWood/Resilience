@@ -232,13 +232,15 @@ export default function App() {
 
                         <span className="card-back-center">
                           <span className="card-back-ornament">✧</span>
-                          <span className="card-back-emblem">✦</span>
+                          <span className="card-back-emblem">
+                            <img src="/images/branding/embleme-resilience-transparent.png" alt="" className="card-back-emblem-image"/>
+                          </span>
                           <span className="card-back-title">RÉSILIENCE</span>
                           <span className="card-back-ornament">✧</span>
                         </span>
 
                         <span className="card-back-bottom">
-                          ÉDITION OR ANCIEN
+                          ÉDITION COLLECTOR
                         </span>
                       </span>
                     </span>
