@@ -126,7 +126,8 @@ export default function App() {
             sensations.
           </p>
           <p>
-            Trois cartes. Un jeton. Une proposition que vous êtes toujours
+            Trois cartes. Un jeton. <br/>
+            Une proposition que vous êtes toujours
             libres d'adapter ou de refuser.
           </p>
           <button onClick={() => setScreen('rules')}>Commencer</button>
@@ -162,25 +163,43 @@ export default function App() {
       {screen === 'booster' && (
         <section className="panel hero">
           <p className="eyebrow">Prototype interactif</p>
-
+          
           <div
             className={`packet${opening ? ' opening' : ''}`}
             aria-hidden="true"
             onAnimationEnd={event => {
-              if (event.target !== event.currentTarget) return;
-
-              if (opening) {
-                setOpening(false);
-                setScreen('reveal');
+              if (
+                !opening ||
+                event.target !== event.currentTarget ||
+                event.animationName !== 'packet-opening'
+              ) {
+                return;
               }
+
+              setOpening(false);
+              setScreen('reveal');
             }}
           >
+            <span className="packet-opening-gap" />
+            <span className="packet-lip packet-lip-top" />
+            <span className="packet-lip packet-lip-bottom" />
+            
+            <span className="packet-tear" />
+            <span className="packet-top-seal" />
+            <span className="packet-light" />
+
             <span className="packet-emblem" aria-hidden="true">
-              <img src="/images/branding/embleme-resilience-transparent.png" alt="" className="packet-emblem-image" />
+              <img
+                src="/images/branding/embleme-resilience-transparent.png"
+                alt=""
+                className="packet-emblem-image"
+              />
             </span>
+
             <span className="packet-brand">RÉSILIENCE</span>
             <span className="packet-edition">ÉDITION COLLECTOR</span>
           </div>
+
 
           <h1>{opening ? 'Le booster s’ouvre…' : 'Votre booster attend'}</h1>
 

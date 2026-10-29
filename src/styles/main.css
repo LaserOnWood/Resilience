@@ -319,11 +319,6 @@ small {
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .welcome-logo-image {
-    animation: none;
-  }
-}
 
 /* Grille des cartes */
 
@@ -811,15 +806,294 @@ footer {
 
 /* Animation d'ouverture du booster - conservée */
 
-.packet.opening {
-  animation: packet-opening 1.2s cubic-bezier(0.2, 0.75, 0.25, 1) forwards;
-  box-shadow: 0 0 50px #a3284b77;
+.packet {
+  --opening-duration: 2.4s;
 }
 
+/* Tous les effets restent derrière le contenu */
+.packet-emblem,
+.packet-brand,
+.packet-edition {
+  position: relative;
+  z-index: 2;
+}
+
+/* Ligne de déchirure */
+.packet-tear {
+  position: absolute;
+  z-index: 5;
+  top: 19px;
+  left: 5%;
+  width: 90%;
+  height: 3px;
+  opacity: 0;
+  pointer-events: none;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #c7a66b,
+    #fff8d9,
+    #f0d8a0,
+    transparent
+  );
+
+  box-shadow:
+    0 0 12px #f0d8a0,
+    0 0 25px #c7a66b;
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+/* Partie supérieure détachable du sachet */
+.packet-top-seal {
+  position: absolute;
+  z-index: 6;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  box-sizing: border-box;
+  pointer-events: none;
+
+  border: 1px solid #c7a66b;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      #a77b45 0px,
+      #f0d8a0 2px,
+      #46232b 4px,
+      #a77b45 6px
+    );
+  box-shadow: 0 3px 8px #0007;
+}
+
+/* Lumière qui s'échappe du paquet */
+.packet-light {
+  position: absolute;
+  z-index: 4;
+  top: 20px;
+  left: 50%;
+  width: 125%;
+  height: 100px;
+  opacity: 0;
+  pointer-events: none;
+
+  background: radial-gradient(
+    ellipse at center,
+    #fff8d9 0%,
+    #f0d8a0cc 18%,
+    #c7a66b55 42%,
+    transparent 72%
+  );
+
+  filter: blur(10px);
+  transform: translateX(-50%) scale(0.2);
+}
+
+
+/* =========================================
+   OUVERTURE PHYSIQUE DU SACHET
+   ========================================= */
+
+/* Cavité sombre visible à l'intérieur */
+.packet-opening-gap {
+  position: absolute;
+  z-index: 3;
+  top: 18px;
+  left: 5%;
+  width: 90%;
+  height: 0;
+  opacity: 0;
+  pointer-events: none;
+
+  background: linear-gradient(
+    180deg,
+    #050207 0%,
+    #170812 45%,
+    #3d1b27 85%,
+    #c7a66b55 100%
+  );
+
+  box-shadow:
+    inset 0 5px 10px #000,
+    0 0 12px #0009;
+
+  transform-origin: top center;
+}
+
+/* Matière métallisée des deux lèvres */
+.packet-lip {
+  position: absolute;
+  z-index: 5;
+  left: 5%;
+  width: 90%;
+  height: 7px;
+  pointer-events: none;
+
+  background: linear-gradient(
+    180deg,
+    #fff0c2 0%,
+    #c7a66b 24%,
+    #78502e 65%,
+    #29121b 100%
+  );
+
+  box-shadow:
+    0 2px 5px #000b,
+    0 0 5px #c7a66b55;
+
+  opacity: 0;
+}
+
+/* Lèvre supérieure */
+.packet-lip-top {
+  top: 17px;
+  transform-origin: top center;
+  border-radius: 30% 60% 20% 40%;
+}
+
+/* Lèvre inférieure */
+.packet-lip-bottom {
+  top: 21px;
+  transform-origin: bottom center;
+  border-radius: 40% 20% 60% 30%;
+
+  background: linear-gradient(
+    180deg,
+    #160912 0%,
+    #805533 35%,
+    #e0bd7b 75%,
+    #fff0c2 100%
+  );
+}
+
+/* Activation synchronisée avec l'ouverture existante */
+.packet.opening .packet-opening-gap {
+  animation: packet-gap-open 2.4s ease-out forwards;
+}
+
+.packet.opening .packet-lip-top {
+  animation: packet-lip-upper 2.4s ease-out forwards;
+}
+
+.packet.opening .packet-lip-bottom {
+  animation: packet-lip-lower 2.4s ease-out forwards;
+}
+
+/* La cavité apparaît après la déchirure */
+@keyframes packet-gap-open {
+  0%, 42% {
+    height: 0;
+    opacity: 0;
+  }
+
+  48% {
+    height: 3px;
+    opacity: 1;
+  }
+
+  65% {
+    height: 13px;
+    opacity: 1;
+  }
+
+  82% {
+    height: 23px;
+    opacity: 1;
+  }
+
+  100% {
+    height: 30px;
+    opacity: 0;
+  }
+}
+
+/* La lèvre supérieure se relève */
+@keyframes packet-lip-upper {
+  0%, 42% {
+    opacity: 0;
+    transform: translateY(0) scaleY(1);
+  }
+
+  48% {
+    opacity: 1;
+    transform: translateY(-2px) scaleY(1);
+  }
+
+  68% {
+    opacity: 1;
+    transform: translateY(-9px) scaleY(1.4);
+  }
+
+  85% {
+    opacity: 1;
+    transform: translateY(-16px) scaleY(1.6);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-22px) scaleY(1.8);
+  }
+}
+
+/* La lèvre inférieure s'abaisse */
+@keyframes packet-lip-lower {
+  0%, 42% {
+    opacity: 0;
+    transform: translateY(0) scaleY(1);
+  }
+
+  48% {
+    opacity: 1;
+    transform: translateY(2px) scaleY(1);
+  }
+
+  68% {
+    opacity: 1;
+    transform: translateY(7px) scaleY(1.3);
+  }
+
+  85% {
+    opacity: 1;
+    transform: translateY(13px) scaleY(1.5);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(18px) scaleY(1.7);
+  }
+}
+
+/* Déclenchement */
+.packet.opening {
+  overflow: visible;
+  clip-path: none;
+
+  animation:
+    packet-opening
+    var(--opening-duration)
+    cubic-bezier(0.2, 0.75, 0.25, 1)
+    forwards;
+}
+
+.packet.opening .packet-tear {
+  animation: packet-tearing 2.4s ease-out forwards;
+}
+
+.packet.opening .packet-top-seal {
+  animation: packet-seal-fly 2.4s ease-in-out forwards;
+}
+
+.packet.opening .packet-light {
+  animation: packet-light-burst 2.4s ease-out forwards;
+}
+
+/* Étincelles décoratives */
 .packet.opening::before,
 .packet.opening::after {
   position: absolute;
-  z-index: 2;
+  z-index: 7;
   color: #ffe3a8;
   font-size: 2rem;
   pointer-events: none;
@@ -828,69 +1102,151 @@ footer {
 
 .packet.opening::before {
   content: "✦";
-  position: absolute;
-  z-index: 3;
-  top: 10%;
+  top: 5%;
   left: -15%;
-  color: #ffe3a8;
-  font-size: 2rem;
-  pointer-events: none;
-  animation: booster-sparkle-left 1.1s ease-out forwards;
+  animation: booster-sparkle-left 1.3s ease-out 0.75s forwards;
 }
 
 .packet.opening::after {
   content: "✧";
-  position: absolute;
-  z-index: 3;
   right: -15%;
   bottom: 15%;
-  color: #ffe3a8;
-  font-size: 2rem;
-  pointer-events: none;
-  animation: booster-sparkle-right 1.1s ease-out 0.1s forwards;
+  animation: booster-sparkle-right 1.3s ease-out 0.9s forwards;
 }
 
-
+/* Animation principale : c'est elle qui termine l'ouverture */
 @keyframes packet-opening {
   0% {
     transform: scale(1) rotate(0);
     filter: brightness(1);
-    box-shadow: 0 0 25px #a3284b55;
     opacity: 1;
   }
 
-  20% {
-    transform: scale(1.04) rotate(-3deg);
+  15% {
+    transform: scale(1.035) rotate(-2deg);
+    filter: brightness(1.15);
+    opacity: 1;
+  }
+
+  30% {
+    transform: scale(1.05) rotate(2deg);
     filter: brightness(1.3);
-    box-shadow:
-      0 0 30px #a3284b99,
-      0 0 55px #c7a66b33;
     opacity: 1;
   }
 
-  40% {
-    transform: scale(1.06) rotate(3deg);
+  43% {
+    transform: scale(1.08) rotate(-1deg);
     filter: brightness(1.6);
     box-shadow:
-      0 0 45px #a3284bcc,
-      0 0 75px #f0d8a055;
+      0 0 35px #c7a66b88,
+      0 0 65px #a3284b88;
     opacity: 1;
   }
 
-  65% {
-    transform: scale(1.12) translateY(-8px);
+  60% {
+    transform: scale(1.12) translateY(5px);
     filter: brightness(1.9);
     box-shadow:
-      0 0 60px #c7a66b99,
-      0 0 100px #a3284b88;
+      0 0 65px #f0d8a099,
+      0 0 110px #c7a66b66;
     opacity: 1;
+  }
+
+  78% {
+    transform: scale(1.16) translateY(12px);
+    filter: brightness(2.5);
+    opacity: 1;
+  }
+
+  90% {
+    transform: scale(1.22) translateY(20px);
+    filter: brightness(3);
+    opacity: 0.85;
   }
 
   100% {
-    transform: scale(0.85) translateY(-16px);
-    filter: brightness(1.2);
-    box-shadow: 0 0 35px #c7a66b55;
-    opacity: 0.35;
+    transform: scale(0.8) translateY(35px);
+    filter: brightness(3);
+    opacity: 0;
+  }
+}
+
+/* Déchirure progressive */
+@keyframes packet-tearing {
+  0%, 29% {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+
+  35% {
+    opacity: 1;
+    transform: scaleX(0.3);
+  }
+
+  46% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+
+  65% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+
+  85%, 100% {
+    opacity: 0;
+    transform: scaleX(1);
+  }
+}
+
+/* La soudure supérieure se détache */
+@keyframes packet-seal-fly {
+  0%, 45% {
+    opacity: 1;
+    transform: translate(0, 0) rotate(0);
+  }
+
+  55% {
+    opacity: 1;
+    transform: translate(7px, -12px) rotate(8deg);
+  }
+
+  75% {
+    opacity: 1;
+    transform: translate(32px, -75px) rotate(24deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(65px, -125px) rotate(55deg);
+  }
+}
+
+/* Explosion de lumière */
+@keyframes packet-light-burst {
+  0%, 43% {
+    opacity: 0;
+    transform: translateX(-50%) scale(0.2);
+  }
+
+  55% {
+    opacity: 0.8;
+    transform: translateX(-50%) scale(0.7);
+  }
+
+  75% {
+    opacity: 1;
+    transform: translateX(-50%) scale(1.5);
+  }
+
+  90% {
+    opacity: 0.9;
+    transform: translateX(-50%) scale(2);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) scale(2.5);
   }
 }
 
@@ -1034,7 +1390,27 @@ footer {
     transition-duration: 0.01ms !important;
   }
 
+  .welcome-logo-image {
+    animation: none;
+  }
+
   .card-inner {
     transition: none;
+  }
+
+  .packet.opening .packet-opening-gap,
+  .packet.opening .packet-lip-top,
+  .packet.opening .packet-lip-bottom,
+
+  .packet.opening {
+    animation: packet-opening 1ms linear forwards;
+  }
+
+  .packet.opening .packet-tear,
+  .packet.opening .packet-top-seal,
+  .packet.opening .packet-light,
+  .packet.opening::before,
+  .packet.opening::after {
+    animation: none;
   }
 }
