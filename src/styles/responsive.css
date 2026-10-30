@@ -95,6 +95,7 @@
     min-height: clamp(240px, 72vw, 330px);
     margin: 1.5rem 0;
     position: relative;
+    overflow: visible;
   }
 
   .cards-emergence .game-card,
@@ -103,7 +104,7 @@
     grid-row: 1;
     position: relative;
     pointer-events: auto;
-    width: min(58vw, 200px);
+    width: min(52vw, 190px);
     justify-self: center;
     align-self: center;
   }
@@ -111,7 +112,7 @@
   .cards-emergence .game-card:nth-child(1) {
     --card-start-x: -90%;
     --card-rotation: -18deg;
-    --card-end-x: -62px;
+    --card-end-x: clamp(-62px, -14vw, -42px);
     --card-end-rotation: -14deg;
     z-index: 1;
     transform: translate(var(--card-end-x), 0) rotate(var(--card-end-rotation));
@@ -129,10 +130,15 @@
   .cards-emergence .game-card:nth-child(3) {
     --card-start-x: 90%;
     --card-rotation: 18deg;
-    --card-end-x: 62px;
+    --card-end-x: clamp(42px, 14vw, 62px);
     --card-end-rotation: 14deg;
     z-index: 2;
     transform: translate(var(--card-end-x), 0) rotate(var(--card-end-rotation));
+  }
+
+  /* Le survol conserve la place de chaque carte dans l'éventail. */
+  .cards-emergence .game-card:not(:disabled):hover {
+    transform: translate(var(--card-end-x), -8px) rotate(var(--card-end-rotation));
   }
 
   .card-frame {
@@ -157,7 +163,7 @@
 
   .cards-emergence .game-card,
   .cards-emergence .game-card:last-child {
-    width: min(56vw, 180px);
+    width: min(50vw, 170px);
   }
 
   .card-frame {
