@@ -88,7 +88,7 @@
   }
 }
 
-/* Après la première révélation, les cartes passent sur une ligne chacune. */
+/* Après l'animation en éventail, les cartes se rangent automatiquement. */
 @media (max-width: 480px) {
   .cards-emergence.cards-flat {
     display: grid;
@@ -177,10 +177,6 @@
     rotate: none;
   }
 
-  .card-frame {
-    padding: 0.5rem;
-  }
-
   .card-category,
   .card-index {
     font-size: 0.7rem;
@@ -198,7 +194,6 @@
   }
 
   .cards-emergence.cards-flat {
-    grid-template-columns: minmax(0, 1fr);
     gap: 0.85rem;
   }
 
