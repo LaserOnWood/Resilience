@@ -88,8 +88,35 @@
   }
 }
 
-/* Éventail de cartes adapté aux petits téléphones */
+/* Après la première révélation, les cartes se rangent sans chevauchement. */
 @media (max-width: 480px) {
+  .cards-emergence.cards-revealing {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.5rem;
+    min-height: 0;
+    align-items: start;
+    overflow: visible;
+  }
+
+  .cards-emergence.cards-revealing .game-card,
+  .cards-emergence.cards-revealing .game-card:last-child {
+    grid-column: auto;
+    grid-row: auto;
+    width: 100%;
+    max-width: none;
+    position: relative;
+    align-self: start;
+    justify-self: stretch;
+    transform: none;
+    z-index: auto;
+    pointer-events: auto;
+  }
+
+  .cards-emergence.cards-revealing .game-card:not(:disabled):hover {
+    transform: translateY(-3px);
+  }
+
+
   .cards-emergence {
     grid-template-columns: minmax(0, 1fr);
     min-height: clamp(240px, 72vw, 330px);
@@ -159,6 +186,17 @@
 @media (max-width: 370px) {
   .cards-emergence {
     min-height: 235px;
+  }
+
+  .cards-emergence.cards-revealing {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.65rem;
+  }
+
+  .cards-emergence.cards-revealing .game-card:last-child {
+    grid-column: 1 / -1;
+    width: calc((100% - 0.65rem) / 2);
+    justify-self: center;
   }
 
   .cards-emergence .game-card,
