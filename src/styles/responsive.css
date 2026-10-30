@@ -101,7 +101,7 @@
 
   .cards-emergence.cards-flat .game-card,
   .cards-emergence.cards-flat .game-card:last-child {
-    grid-column: 1;
+    grid-column: auto;
     grid-row: auto;
     width: min(100%, 320px);
     max-width: 100%;
