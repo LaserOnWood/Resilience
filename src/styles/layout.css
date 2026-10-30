@@ -176,14 +176,4 @@ footer {
 
 .footer-toggle {
   min-height: 40px;
-  padding: 0.6rem 0.9rem;
-  border: 1px solid #6d3347;
-  border-radius: 0.65rem;
-  background: #26151f;
-  color: var(--ivory);
-  cursor: pointer;
-}
-
-.footer-toggle[aria-pressed="true"] {
-  border-color: var(--gold);
 }
