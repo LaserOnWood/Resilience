@@ -118,22 +118,24 @@
     transform: translateY(-3px);
   }
 
-  /* Dans la disposition verticale, garde une typographie proche de l'ordinateur. */
-  .cards-emergence.cards-flat .card-name,
+  /* Même typographie mobile que main, appliquée aux cartes en colonne. */
+  .cards-emergence.cards-flat .card-name {
+    font-size: clamp(1rem, 3.5vw, 1.4rem);
+  }
+
   .cards-emergence.cards-flat .card-number .card-name,
   .cards-emergence.cards-flat .card-zone .card-name,
   .cards-emergence.cards-flat .card-accessory .card-name {
-    font-size: clamp(1.1rem, 4.5vw, 1.9rem);
+    font-size: clamp(1rem, 5vw, 1.6rem);
   }
 
   .cards-emergence.cards-flat .card-description {
-    font-size: clamp(0.85rem, 2.8vw, 1rem);
-    line-height: 1.4;
+    font-size: clamp(0.62rem, 2.3vw, 0.8rem);
   }
 
   .cards-emergence.cards-flat .card-category,
   .cards-emergence.cards-flat .card-index {
-    font-size: clamp(0.7rem, 2vw, 0.85rem);
+    font-size: 0.6rem;
   }
 
   .cards-emergence {
