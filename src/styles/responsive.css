@@ -14,7 +14,6 @@
     text-align: center;
   }
 
-  .top .sound-toggle,
   .top .text-button {
     width: 100%;
     min-width: 0;
@@ -256,6 +255,16 @@
 }
 
 @media (max-width: 600px) {
+  .footer-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .footer-toggle {
+    width: 100%;
+    min-height: 44px;
+  }
+
   .history-cards {
     grid-template-columns: 1fr;
   }
@@ -263,4 +272,18 @@
   .history-item {
     padding: 1rem;
   }
+}
+
+
+/* Désactivation volontaire des animations pour les appareils peu puissants. */
+.shell.animations-disabled *,
+.shell.animations-disabled *::before,
+.shell.animations-disabled *::after {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}
+
+.shell.animations-disabled .cards-emergence {
+  will-change: auto;
 }
