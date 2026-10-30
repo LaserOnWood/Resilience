@@ -114,6 +114,7 @@
     --card-end-x: -62px;
     --card-end-rotation: -14deg;
     z-index: 1;
+    transform: translate(var(--card-end-x), 0) rotate(var(--card-end-rotation));
   }
 
   .cards-emergence .game-card:nth-child(2) {
@@ -122,6 +123,7 @@
     --card-end-x: 0px;
     --card-end-rotation: 0deg;
     z-index: 3;
+    transform: translate(var(--card-end-x), 0) rotate(var(--card-end-rotation));
   }
 
   .cards-emergence .game-card:nth-child(3) {
@@ -130,6 +132,7 @@
     --card-end-x: 62px;
     --card-end-rotation: 14deg;
     z-index: 2;
+    transform: translate(var(--card-end-x), 0) rotate(var(--card-end-rotation));
   }
 
   .card-frame {
