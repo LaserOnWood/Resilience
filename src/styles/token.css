@@ -1,18 +1,26 @@
-/* Jeton mystique : argent patiné, gravures et lumière lunaire. */
+/* Jeton mystique : pièce circulaire en argent sombre, énergie et particules. */
 .token-area {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
-  margin: clamp(2rem, 5vw, 3.5rem) auto 1rem;
+  gap: 1.15rem;
+  margin: clamp(2.25rem, 6vw, 4rem) auto 1.25rem;
   text-align: center;
+  isolation: isolate;
 }
 
 .coin {
   position: relative;
+  z-index: 0;
   display: grid;
-  width: clamp(112px, 24vw, 164px);
-  aspect-ratio: 1;
+  width: clamp(116px, 26vw, 168px);
+  min-width: clamp(116px, 26vw, 168px);
+  max-width: clamp(116px, 26vw, 168px);
+  height: clamp(116px, 26vw, 168px);
+  min-height: clamp(116px, 26vw, 168px);
+  max-height: clamp(116px, 26vw, 168px);
+  aspect-ratio: 1 / 1;
   flex: 0 0 auto;
   place-items: center;
   padding: 7px;
@@ -20,45 +28,69 @@
   border: 1px solid #d9e0e9;
   border-radius: 50%;
   background:
-    radial-gradient(circle at 28% 18%, #f4f6fa 0, #aeb8c6 10%, transparent 31%),
-    linear-gradient(135deg, #707b8b 0%, #252d3a 24%, #b7c1ce 43%, #414b5a 60%, #161c27 78%, #8793a2 100%);
+    radial-gradient(circle at 28% 17%, #f7f9ff 0, #c0cad8 8%, transparent 29%),
+    conic-gradient(from 22deg, #eef3fb, #515d6d 12%, #aab6c7 23%, #252e3c 36%, #d4deeb 48%, #475363 60%, #131a26 74%, #9daabd 87%, #eef3fb);
   box-shadow:
-    0 15px 32px #000a,
-    0 0 26px #aebedb20,
-    inset 0 0 0 2px #18202c,
-    inset 0 0 0 4px #d7e0edb0;
+    0 15px 32px #000b,
+    0 0 24px #c8d9f033,
+    inset 0 0 0 2px #141b27,
+    inset 0 0 0 4px #e0e8f2;
   color: #f0f3f8;
   cursor: pointer;
-  transition: filter 220ms ease, box-shadow 220ms ease, transform 220ms ease;
+  isolation: isolate;
+  -webkit-tap-highlight-color: transparent;
+  transition: filter 220ms ease, box-shadow 220ms ease;
+}
+
+.coin::before,
+.coin::after {
+  position: absolute;
+  z-index: -1;
+  inset: -12%;
+  border: 1px solid #cbdaf0;
+  border-radius: 50%;
+  content: "";
+  opacity: 0;
+  pointer-events: none;
+}
+
+.coin::before {
+  box-shadow: 0 0 14px #b9d7ff99, inset 0 0 16px #a9caff44;
+}
+
+.coin::after {
+  inset: -22%;
+  border: 1px dashed #d9e8ff;
+  box-shadow: 0 0 20px #9dc7ff88;
 }
 
 .coin:not(:disabled):hover {
-  background:
-    radial-gradient(circle at 28% 18%, #f4f6fa 0, #aeb8c6 10%, transparent 31%),
-    linear-gradient(135deg, #8995a5 0%, #303949 24%, #d1d9e4 43%, #505c6e 60%, #202734 78%, #aab5c4 100%);
-  box-shadow: 0 17px 38px #000b, 0 0 30px #c9d8f055, inset 0 0 0 2px #18202c, inset 0 0 0 4px #edf2f9;
-  filter: brightness(1.08);
+  filter: brightness(1.14);
+  box-shadow: 0 18px 42px #000c, 0 0 35px #c9d8f077, inset 0 0 0 2px #141b27, inset 0 0 0 4px #edf2f9;
 }
 
 .coin:disabled {
   cursor: not-allowed;
-  opacity: 0.62;
+  opacity: 0.8;
 }
 
 .coin:focus-visible {
   outline: 3px solid var(--gold-light);
-  outline-offset: 6px;
+  outline-offset: 8px;
 }
 
 .coin-rim {
+  position: relative;
+  z-index: 2;
   display: block;
   width: 100%;
   height: 100%;
   padding: 6px;
-  border: 1px solid #dce4ef99;
+  overflow: hidden;
+  border: 1px solid #dce4efcc;
   border-radius: 50%;
   background:
-    repeating-conic-gradient(from 0deg, #dce3ed 0deg 2deg, #667282 2deg 4deg, #aeb9c8 4deg 6deg);
+    repeating-conic-gradient(from 0deg, #e4ebf5 0deg 1.5deg, #596575 1.5deg 3deg, #aeb9c8 3deg 4.5deg);
   box-shadow: inset 0 0 0 2px #202735, 0 0 0 1px #151b25;
 }
 
@@ -74,25 +106,24 @@
   border: 2px solid #8996a7;
   border-radius: 50%;
   background:
-    radial-gradient(ellipse at 50% 42%, #657286 0%, #303a4b 43%, #161c27 78%),
-    #252d3a;
-  box-shadow: inset 0 0 0 2px #161c27, inset 0 0 20px #03060c;
+    radial-gradient(ellipse at 50% 38%, #748196 0%, #384355 38%, #202938 67%, #101621 100%);
+  box-shadow: inset 0 0 0 2px #161c27, inset 0 0 22px #03060c;
 }
 
 .coin-face::before {
   position: absolute;
   inset: 7%;
-  border: 1px solid #d4deec88;
+  border: 1px solid #d4deec99;
   border-radius: 50%;
   content: "";
   pointer-events: none;
-  background: repeating-conic-gradient(from 0deg, transparent 0deg 14deg, #dbe4f00b 14deg 15deg);
+  background: repeating-conic-gradient(from 0deg, transparent 0deg 14deg, #dbe4f018 14deg 15deg);
 }
 
 .coin-face::after {
   position: absolute;
   inset: 13%;
-  border: 1px dashed #d5deeb55;
+  border: 1px dashed #d5deeb77;
   border-radius: 50%;
   content: "";
   pointer-events: none;
@@ -102,10 +133,10 @@
   position: relative;
   z-index: 1;
   display: block;
-  width: 54%;
-  height: 54%;
+  width: 57%;
+  height: 57%;
   object-fit: contain;
-  filter: grayscale(1) brightness(1.6) contrast(0.82) drop-shadow(0 0 7px #dce7f066);
+  filter: grayscale(1) brightness(1.8) contrast(0.9) drop-shadow(0 0 9px #dce7f099);
 }
 
 .coin-question {
@@ -115,35 +146,103 @@
   width: 33%;
   aspect-ratio: 1;
   place-items: center;
-  border: 1px solid #dbe3eeaa;
+  border: 1px solid #dbe3eecc;
   border-radius: 50%;
-  background: #171e2be8;
+  background: #171e2bf2;
   color: #f0f3f8;
   font-family: Georgia, "Times New Roman", serif;
   font-size: clamp(1.25rem, 5vw, 2rem);
-  box-shadow: 0 2px 8px #0009;
+  box-shadow: 0 2px 8px #0009, 0 0 12px #d7e8ff66;
 }
 
 .coin-inscription {
   position: absolute;
   z-index: 2;
   bottom: 12%;
-  color: #dce4ef;
+  color: #e7edf7;
   font-family: Georgia, "Times New Roman", serif;
   font-size: clamp(0.43rem, 1.7vw, 0.62rem);
   font-weight: 700;
   letter-spacing: 0.2em;
-  text-shadow: 0 1px 3px #000;
+  text-shadow: 0 1px 3px #000, 0 0 8px #d7e8ff66;
 }
 
+.coin-aura {
+  position: absolute;
+  z-index: -1;
+  width: clamp(160px, 38vw, 236px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, transparent, #8db9ff2c, transparent, #e6f3ff45, transparent, #7f9ffb33, transparent);
+  filter: blur(8px);
+  opacity: 0.22;
+  pointer-events: none;
+}
+
+.coin-particles {
+  position: absolute;
+  z-index: 3;
+  inset: -42px;
+  overflow: visible;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.coin-particle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #f2f8ff;
+  box-shadow: 0 0 7px 2px #a8d0ff, 0 0 16px #d6eaff;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.2);
+}
+
+.particle-1 { --dx: -88px; --dy: -52px; --delay: 0ms; }
+.particle-2 { --dx: -42px; --dy: -94px; --delay: 25ms; }
+.particle-3 { --dx: 22px; --dy: -87px; --delay: 45ms; }
+.particle-4 { --dx: 82px; --dy: -60px; --delay: 10ms; }
+.particle-5 { --dx: 94px; --dy: 7px; --delay: 55ms; }
+.particle-6 { --dx: 67px; --dy: 70px; --delay: 15ms; }
+.particle-7 { --dx: 9px; --dy: 96px; --delay: 40ms; }
+.particle-8 { --dx: -62px; --dy: 76px; --delay: 20ms; }
+.particle-9 { --dx: -96px; --dy: 15px; --delay: 60ms; }
+.particle-10 { --dx: -54px; --dy: -24px; --delay: 35ms; }
+.particle-11 { --dx: 39px; --dy: -33px; --delay: 5ms; }
+.particle-12 { --dx: 43px; --dy: 37px; --delay: 50ms; }
+
 .coin-revealed {
-  animation: coin-toss-and-land 1.15s cubic-bezier(0.22, 0.72, 0.25, 1) both;
+  animation: coin-epic-toss 1.75s cubic-bezier(0.18, 0.82, 0.2, 1) both;
+}
+
+.coin-revealed::before {
+  animation: coin-ring-burst 1.05s ease-out 0.48s both;
+}
+
+.coin-revealed::after {
+  animation: coin-ring-burst 1.25s ease-out 0.58s both;
+}
+
+.coin-revealed .coin-aura {
+  animation: coin-aura-surge 1.8s ease-out both;
+}
+
+.coin-revealed .coin-particle {
+  animation: coin-particle-burst 1.15s cubic-bezier(0.15, 0.7, 0.2, 1) calc(0.62s + var(--delay)) both;
+}
+
+.coin-revealed .coin-rim {
+  animation: coin-rim-flash 1.4s ease-out 0.5s both;
 }
 
 .coin-revealed .coin-question {
   opacity: 0;
-  transform: scale(0.65);
-  transition: opacity 180ms ease, transform 180ms ease;
+  transform: scale(0.45) rotate(-35deg);
+  transition: opacity 200ms ease, transform 240ms ease;
 }
 
 .token-phrase {
@@ -157,44 +256,66 @@
   color: var(--ivory);
   font-family: Georgia, "Times New Roman", serif;
   font-size: clamp(1.05rem, 2.5vw, 1.3rem);
-  text-shadow: 0 0 18px #b8c9e033;
-  animation: token-phrase-arrive 550ms ease-out both;
+  text-shadow: 0 0 18px #b8c9e055, 0 0 32px #91b8ff22;
+  animation: token-phrase-arrive 650ms ease-out 0.72s both;
 }
 
-@keyframes coin-toss-and-land {
-  0% {
-    transform: translateY(0) rotate(0deg) scale(0.96);
-    filter: brightness(1);
-  }
-  22% {
-    transform: translateY(-78px) rotate(190deg) scale(1.06);
-    filter: brightness(1.3);
-  }
-  48% {
-    transform: translateY(-92px) rotate(390deg) scale(1.08);
-    filter: brightness(1.5);
-  }
-  72% {
-    transform: translateY(0) rotate(590deg) scale(0.94);
-    filter: brightness(1.2);
-  }
-  84% {
-    transform: translateY(-10px) rotate(650deg) scale(1.02);
-  }
-  100% {
-    transform: translateY(0) rotate(720deg) scale(1);
-    filter: brightness(1);
-  }
+@keyframes coin-epic-toss {
+  0% { transform: translateY(0) rotate(0deg) scale(0.82); filter: brightness(1); }
+  13% { transform: translateY(-20px) rotate(110deg) scale(1.03); filter: brightness(1.4); }
+  34% { transform: translateY(-112px) rotate(430deg) scale(1.13); filter: brightness(1.8) drop-shadow(0 0 20px #a8d0ff); }
+  49% { transform: translateY(-125px) rotate(610deg) scale(1.16); filter: brightness(2) drop-shadow(0 0 30px #d7eaff); }
+  69% { transform: translateY(-5px) rotate(850deg) scale(0.91); filter: brightness(1.45); }
+  77% { transform: translateY(0) rotate(900deg) scale(1.04); filter: brightness(1.8); }
+  84% { transform: translateY(-13px) rotate(935deg) scale(0.99); filter: brightness(1.35); }
+  91% { transform: translateY(0) rotate(960deg) scale(1.015); filter: brightness(1.5); }
+  100% { transform: translateY(0) rotate(1080deg) scale(1); filter: brightness(1); }
+}
+
+@keyframes coin-ring-burst {
+  0% { transform: scale(0.45) rotate(0deg); opacity: 0; }
+  18% { opacity: 0.95; }
+  100% { transform: scale(1.55) rotate(80deg); opacity: 0; }
+}
+
+@keyframes coin-aura-surge {
+  0% { transform: scale(0.45) rotate(0deg); opacity: 0.12; filter: blur(12px); }
+  38% { transform: scale(1.22) rotate(120deg); opacity: 0.95; filter: blur(4px); }
+  70% { transform: scale(1.5) rotate(210deg); opacity: 0.55; filter: blur(9px); }
+  100% { transform: scale(1.7) rotate(300deg); opacity: 0.08; filter: blur(15px); }
+}
+
+@keyframes coin-particle-burst {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(0.2); }
+  15% { opacity: 1; }
+  100% { opacity: 0; transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1.35); }
+}
+
+@keyframes coin-rim-flash {
+  0%, 100% { filter: brightness(1); }
+  35% { filter: brightness(2.2) drop-shadow(0 0 10px #e4f1ff); }
+  58% { filter: brightness(1.35); }
 }
 
 @keyframes token-phrase-arrive {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(14px) scale(0.96); filter: blur(4px); }
+  to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
 }
 
 .animations-disabled .coin-revealed,
+.animations-disabled .coin-revealed::before,
+.animations-disabled .coin-revealed::after,
+.animations-disabled .coin-revealed .coin-aura,
+.animations-disabled .coin-revealed .coin-particle,
+.animations-disabled .coin-revealed .coin-rim,
 .animations-disabled .token-phrase-visible {
-  animation: none;
+  animation: none !important;
+}
+
+.animations-disabled .coin-revealed::before,
+.animations-disabled .coin-revealed::after,
+.animations-disabled .coin-particle {
+  opacity: 0;
 }
 
 .animations-disabled .coin-question {
@@ -208,7 +329,23 @@
   }
 
   .coin-revealed,
+  .coin-revealed::before,
+  .coin-revealed::after,
+  .coin-revealed .coin-aura,
+  .coin-revealed .coin-particle,
+  .coin-revealed .coin-rim,
   .token-phrase-visible {
-    animation: none;
+    animation: none !important;
   }
+
+  .coin-particle,
+  .coin::before,
+  .coin::after {
+    opacity: 0;
+  }
+}
+
+@media (max-width: 380px) {
+  .coin-particles { inset: -28px; }
+  .coin-particle { width: 4px; height: 4px; }
 }
