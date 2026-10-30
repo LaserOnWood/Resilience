@@ -32,7 +32,7 @@
   .card-number .card-name,
   .card-zone .card-name,
   .card-accessory .card-name {
-  font-size: clamp(1rem, 5vw, 1.6rem);
+    font-size: clamp(1rem, 5vw, 1.6rem);
   }
 
   .card-description {
@@ -100,37 +100,6 @@
   .packet.opening::after {
     animation: none;
   }
-}
-
-
-/* Contrôle sonore collector */
-
-.sound-toggle {
-  padding: 0.45rem 0.75rem;
-  border: 1px solid #c7a66b88;
-  border-radius: 999px;
-  background: #260d19;
-  color: var(--gold-light);
-  font-size: 0.78rem;
-  cursor: pointer;
-  transition:
-    background 200ms ease,
-    border-color 200ms ease;
-}
-
-.sound-toggle:hover {
-  background: #491326;
-  border-color: var(--gold-light);
-}
-
-.sound-toggle[aria-pressed="true"] {
-  border-color: var(--gold-light);
-  background: #491326;
-}
-
-.sound-toggle:focus-visible {
-  outline: 2px solid var(--gold-light);
-  outline-offset: 3px;
 }
 
 @media (max-width: 480px) {
