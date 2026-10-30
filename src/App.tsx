@@ -317,7 +317,7 @@ export default function App() {
               : `${revealed.length} carte${revealed.length > 1 ? 's' : ''} sur 3 révélée${revealed.length > 1 ? 's' : ''}. Choisissez la prochaine !`}
           </p>
 
-          <div className="cards cards-emergence">
+          <div className={`cards cards-emergence${revealed.length > 0 ? ' cards-revealing' : ''}`}>
             {draw.cards.map((card, i) => {
               const isRevealed = revealed.includes(i);
               const presentation = getCardPresentation(card);
