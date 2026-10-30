@@ -99,16 +99,17 @@
     overflow: visible;
   }
 
-  .cards-emergence.cards-flat .game-card,
-  .cards-emergence.cards-flat .game-card:last-child {
-    grid-column: auto;
-    grid-row: auto;
-    width: min(100%, 320px);
+  .cards-emergence.cards-flat > .game-card {
+    grid-column: auto !important;
+    grid-row: auto !important;
+    width: 100%;
+    min-width: 0;
     max-width: 100%;
     position: relative;
     align-self: start;
-    justify-self: center;
+    justify-self: stretch;
     transform: none;
+    rotate: none;
     z-index: auto;
     pointer-events: auto;
     transition: transform 220ms ease;
@@ -118,8 +119,8 @@
     transform: translateY(-3px);
   }
 
-  .cards-emergence.cards-flat .game-card:last-child {
-    grid-column: 1 / -1;
+  .cards-emergence.cards-flat > .game-card:last-child {
+    grid-column: 1 / -1 !important;
     width: calc((100% - 0.75rem) / 2);
     justify-self: center;
   }
@@ -201,7 +202,7 @@
     gap: 0.45rem;
   }
 
-  .cards-emergence.cards-flat .game-card:last-child {
+  .cards-emergence.cards-flat > .game-card:last-child {
     width: calc((100% - 0.45rem) / 2);
   }
 
