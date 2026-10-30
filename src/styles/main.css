@@ -1539,3 +1539,157 @@ footer {
     font-size: 0.7rem;
   }
 }
+
+
+/* =========================================
+   HISTORIQUE — COLLECTION PRIVÉE
+   ========================================= */
+
+.history-screen {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.history-list {
+  display: grid;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.history-item {
+  padding: 1.25rem;
+  border: 1px solid #c7a66b88;
+  border-radius: 12px;
+
+  background:
+    linear-gradient(135deg, #491326 0%, #260d19 65%, #170b13 100%);
+
+  box-shadow:
+    0 12px 30px #0005,
+    inset 0 0 0 4px #170d14,
+    inset 0 0 0 5px #c7a66b33;
+}
+
+.history-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #c7a66b55;
+}
+
+.history-number {
+  color: #f0d8a0;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.history-item time {
+  color: #c9b6be;
+  font-size: 0.8rem;
+}
+
+.history-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.history-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  min-width: 0;
+  padding: 1rem 0.75rem;
+
+  border: 1px solid #c7a66b66;
+  border-radius: 8px;
+
+  background: linear-gradient(
+    145deg,
+    #371321,
+    #190c15
+  );
+
+  text-align: center;
+}
+
+.history-card-category {
+  color: #d6b77d;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.history-card strong {
+  color: #fff1d0;
+  font-family: Georgia, 'Times New Roman', serif;
+  overflow-wrap: anywhere;
+}
+
+.history-card small {
+  color: #c9b6be;
+  line-height: 1.5;
+}
+
+.history-token {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+
+  margin-top: 1.25rem;
+  padding: 0.85rem;
+
+  border-top: 1px solid #c7a66b44;
+  color: #f0d8a0;
+  text-align: center;
+}
+
+.history-token > span {
+  font-size: 1.5rem;
+}
+
+.history-token p {
+  margin: 0;
+  font-style: italic;
+}
+
+.history-empty {
+  padding: 2.5rem 1rem;
+  border: 1px dashed #c7a66b77;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.history-empty > span {
+  color: #f0d8a0;
+  font-size: 3rem;
+}
+
+.history-empty h2 {
+  color: #f0d8a0;
+  font-family: Georgia, 'Times New Roman', serif;
+}
+
+.history-delete {
+  border-color: #b76a79;
+  color: #f1b9c4;
+}
+
+@media (max-width: 600px) {
+  .history-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .history-item {
+    padding: 1rem;
+  }
+}

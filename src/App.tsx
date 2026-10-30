@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { playSound, unlockAudio } from './lib/sound';
 import { createDraw, drawToken } from './lib/game';
 import type { Draw, Card } from './types/game';
+import { getHistory, saveDraw, clearHistory } from './lib/history';
 
 type Screen = 'welcome' | 'rules' | 'booster' | 'reveal' | 'summary' | 'history';
 
@@ -58,6 +59,7 @@ export default function App() {
   const [revealed, setRevealed] = useState<number[]>([]);
   const [tokenVisible, setTokenVisible] = useState(false);
   const [opening, setOpening] = useState(false);
+  const [history, setHistory] = useState<Draw[]>(() => getHistory());
 
 
   const [soundEnabled, setSoundEnabled] = useState(false);
@@ -105,6 +107,25 @@ export default function App() {
 
 
   
+  const finishDraw = () => {
+    if (!draw || revealed.length !== 3 || !tokenVisible) return;
+
+    const updated = saveDraw(draw);
+    setHistory(updated);
+    setScreen('summary');
+  };
+
+  const deleteHistory = () => {
+    const confirmed = window.confirm(
+      'Supprimer définitivement tous les tirages enregistrés sur cet appareil ?'
+    );
+
+    if (!confirmed) return;
+
+    clearHistory();
+    setHistory([]);
+  };
+
   const start = () => {
     if (opening) return;
 
@@ -197,7 +218,10 @@ export default function App() {
             Une proposition que vous êtes toujours
             libres d'adapter ou de refuser.
           </p>
-          <button onClick={() => setScreen('rules')}>Commencer</button>
+          <div className="actions">
+            <button onClick={() => setScreen('rules')}> Commencer </button>
+            <button className="secondary" onClick={() => setScreen('history')}> Mon historique ({history.length}) </button>
+          </div>
         </section>
       )}
 
@@ -411,7 +435,7 @@ export default function App() {
                 >
                   Relancer le jeton
                 </button>
-                <button onClick={() => setScreen('summary')}>
+                <button onClick={finishDraw}>
                   Voir le récapitulatif
                 </button>
               </div>
@@ -431,10 +455,94 @@ export default function App() {
           ))}
           <p className="quote">{draw.token.text}</p>
           <p>Ce résultat est une proposition, jamais une obligation.</p>
-          <button onClick={() => setScreen('booster')}>Nouveau booster</button>
-          <small>Historique local prévu pour la phase 2.</small>
+          <div className="actions">
+            <button onClick={() => setScreen('booster')}> Nouveau booster </button>
+            <button className="secondary" onClick={() => setScreen('history')}> Voir mon historique </button>
+          </div>
         </section>
       )}
+
+{screen === 'history' && (
+  <section className="panel wide history-screen">
+    <p className="eyebrow">Collection privée</p>
+    <h1>Mon historique</h1>
+
+    <p>
+      Retrouvez vos précédents tirages enregistrés sur cet appareil.
+    </p>
+
+    {history.length === 0 ? (
+      <div className="history-empty">
+        <span aria-hidden="true">✧</span>
+        <h2>Votre collection vous attend</h2>
+        <p>
+          Terminez votre premier booster pour inaugurer
+          votre historique personnel.
+        </p>
+      </div>
+    ) : (
+      <div className="history-list">
+        {history.map((item, index) => (
+          <article className="history-item" key={item.id}>
+            <div className="history-item-header">
+              <span className="history-number">
+                ✦ TIRAGE Nº {history.length - index}
+              </span>
+
+              <time dateTime={item.createdAt}>
+                {new Date(item.createdAt).toLocaleString('fr-FR', {
+                  day: '2-digit',
+                  month: 'long',
+                  year: 'numeric',
+                  hour: '2-digit',
+                  minute: '2-digit',
+                })}
+              </time>
+            </div>
+
+            <div className="history-cards">
+              {item.cards.map(card => (
+                <div className="history-card" key={card.id}>
+                  <span className="history-card-category">
+                    {getCardPresentation(card).category}
+                  </span>
+                  <strong>{card.name}</strong>
+                  <small>{card.description}</small>
+                </div>
+              ))}
+            </div>
+
+            <div className="history-token">
+              <span aria-hidden="true">✧</span>
+              <p>{item.token.text}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    )}
+
+      <div className="actions">
+        <button onClick={() => setScreen('welcome')}>
+          Retour à l'accueil
+        </button>
+
+        {history.length > 0 && (
+          <button
+            className="secondary history-delete"
+            onClick={deleteHistory}
+          >
+            Effacer l'historique
+          </button>
+        )}
+      </div>
+
+      <small>
+        Historique conservé uniquement dans ce navigateur,
+        dans la limite de 50 tirages.
+      </small>
+    </section>
+  )}
+
 
       <footer>Résilience · Prototype privé · Consentement avant tout</footer>
     </main>
