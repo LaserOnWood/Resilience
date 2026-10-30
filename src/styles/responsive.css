@@ -109,8 +109,8 @@
   .cards-emergence .game-card:nth-child(1) {
     --card-start-x: -90%;
     --card-rotation: -18deg;
-    --card-end-x: -24px;
-    --card-end-rotation: -12deg;
+    --card-end-x: -48px;
+    --card-end-rotation: -14deg;
     z-index: 1;
   }
 
@@ -119,15 +119,15 @@
     --card-rotation: 0deg;
     --card-end-x: 0px;
     --card-end-rotation: 0deg;
-    z-index: 2;
+    z-index: 3;
   }
 
   .cards-emergence .game-card:nth-child(3) {
     --card-start-x: 90%;
     --card-rotation: 18deg;
-    --card-end-x: 24px;
-    --card-end-rotation: 12deg;
-    z-index: 3;
+    --card-end-x: 48px;
+    --card-end-rotation: 14deg;
+    z-index: 2;
   }
 
   .card-frame {
