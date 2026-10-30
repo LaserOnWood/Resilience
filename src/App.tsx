@@ -440,6 +440,12 @@ export default function App() {
               aria-label={tokenVisible ? 'Jeton révélé' : 'Lancer le jeton pour révéler la phrase'}
               aria-pressed={tokenVisible}
             >
+              <span className="coin-aura" aria-hidden="true" />
+              <span className="coin-particles" aria-hidden="true">
+                {Array.from({ length: 12 }, (_, i) => (
+                  <span key={i} className={`coin-particle particle-${i + 1}`} />
+                ))}
+              </span>
               <span className="coin-rim" aria-hidden="true">
                 <span className="coin-face">
                   <img
