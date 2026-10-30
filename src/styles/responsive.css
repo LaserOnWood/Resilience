@@ -1,0 +1,120 @@
+/* Adaptation mobile */
+
+@media (max-width: 540px) {
+  .cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+
+  .game-card:last-child {
+    grid-column: 1 / -1;
+    width: calc((100% - 0.75rem) / 2);
+    justify-self: center;
+  }
+
+  .card-frame {
+    padding: 0.5rem;
+  }
+
+  .card-back-top,
+  .card-back-bottom {
+    font-size: 0.55rem;
+  }
+
+  .card-back-title {
+    font-size: clamp(0.7rem, 3vw, 1rem);
+  }
+
+  .card-name {
+    font-size: clamp(1rem, 3.5vw, 1.4rem);
+  }
+
+  .card-number .card-name,
+  .card-zone .card-name,
+  .card-accessory .card-name {
+    font-size: clamp(1rem, 5vw, 1.6rem);
+  }
+
+  .card-description {
+    font-size: clamp(0.62rem, 2.3vw, 0.8rem);
+  }
+
+  .card-category,
+  .card-index {
+    font-size: 0.6rem;
+  }
+
+  .top {
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 370px) {
+  .cards {
+    gap: 0.45rem;
+  }
+
+  .game-card:last-child {
+    width: calc((100% - 0.45rem) / 2);
+  }
+
+  .card-frame {
+    padding: 0.3rem;
+  }
+
+  .card-front-footer {
+    letter-spacing: 0;
+  }
+}
+
+/* Réduction des animations et accessibilité */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .welcome-logo-image {
+    animation: none;
+  }
+
+  .card-inner {
+    transition: none;
+  }
+
+  .cards-emergence .game-card {
+    animation: none;
+    will-change: auto;
+  }
+
+  .packet.opening {
+    animation: packet-opening 1ms linear forwards;
+  }
+
+  .packet.opening .packet-tear,
+  .packet.opening .packet-top-seal,
+  .packet.opening .packet-light,
+  .packet.opening::before,
+  .packet.opening::after {
+    animation: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .sound-toggle {
+    padding: 0.4rem 0.55rem;
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .history-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .history-item {
+    padding: 1rem;
+  }
+}
