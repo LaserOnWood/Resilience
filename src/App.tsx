@@ -57,6 +57,7 @@ export default function App() {
   const [screen, setScreen] = useState<Screen>('welcome');
   const [draw, setDraw] = useState<Draw | null>(null);
   const [revealed, setRevealed] = useState<number[]>([]);
+  const [fanSettled, setFanSettled] = useState(false);
   const [tokenVisible, setTokenVisible] = useState(false);
   const [opening, setOpening] = useState(false);
   const [history, setHistory] = useState<Draw[]>(() => getHistory());
@@ -133,6 +134,7 @@ export default function App() {
 
     setDraw(createDraw());
     setRevealed([]);
+    setFanSettled(false);
     setTokenVisible(false);
     setOpening(true);
 
@@ -317,7 +319,17 @@ export default function App() {
               : `${revealed.length} carte${revealed.length > 1 ? 's' : ''} sur 3 révélée${revealed.length > 1 ? 's' : ''}. Choisissez la prochaine !`}
           </p>
 
-          <div className="cards cards-emergence">
+          <div
+            className={`cards cards-emergence${fanSettled ? ' cards-flat' : ''}`}
+            onAnimationEnd={event => {
+              if (
+                event.target === event.currentTarget.lastElementChild &&
+                event.animationName === 'collector-card-emergence'
+              ) {
+                setFanSettled(true);
+              }
+            }}
+          >
             {draw.cards.map((card, i) => {
               const isRevealed = revealed.includes(i);
               const presentation = getCardPresentation(card);

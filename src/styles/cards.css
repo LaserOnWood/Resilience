@@ -399,6 +399,8 @@
 .cards-emergence .game-card {
   --card-start-x: 0px;
   --card-rotation: 0deg;
+  --card-end-x: 0;
+  --card-end-rotation: 0deg;
   --card-delay: 0ms;
 
   animation:
@@ -460,9 +462,9 @@
   65% {
     opacity: 1;
     transform:
-      translate(0, -18px)
+      translate(var(--card-end-x), -18px)
       scale(1.05)
-      rotate(0deg)
+      rotate(var(--card-end-rotation))
       rotateX(0);
 
     filter: brightness(1.2);
@@ -470,9 +472,9 @@
 
   85% {
     transform:
-      translate(0, 5px)
+      translate(var(--card-end-x), 5px)
       scale(0.98)
-      rotate(0deg);
+      rotate(var(--card-end-rotation));
 
     filter: brightness(1);
   }
@@ -480,9 +482,9 @@
   100% {
     opacity: 1;
     transform:
-      translate(0, 0)
+      translate(var(--card-end-x), 0)
       scale(1)
-      rotate(0deg);
+      rotate(var(--card-end-rotation));
 
     filter: brightness(1);
   }
