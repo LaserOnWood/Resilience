@@ -33,6 +33,30 @@
   },
   {
     "id": "accessory-5",
+    "name": "Cravache",
+    "category": "accessory",
+    "description": "Proposition facultative, à adapter ensemble.",
+    "image": "",
+    "value": "Cravache"
+  },
+  {
+    "id": "accessory-6",
+    "name": "Griffe",
+    "category": "accessory",
+    "description": "Proposition facultative, à adapter ensemble.",
+    "image": "",
+    "value": "Griffe"
+  },
+  {
+    "id": "accessory-7",
+    "name": "Plume",
+    "category": "accessory",
+    "description": "Proposition facultative, à adapter ensemble.",
+    "image": "",
+    "value": "Plume"
+  },
+  {
+    "id": "accessory-8",
     "name": "Martinet",
     "category": "accessory",
     "description": "Proposition facultative, à adapter ensemble.",
@@ -40,11 +64,35 @@
     "value": "Martinet"
   },
   {
-    "id": "accessory-6",
+    "id": "accessory-9",
     "name": "Fouet",
     "category": "accessory",
     "description": "Proposition facultative, à adapter ensemble.",
     "image": "",
     "value": "Fouet"
+  },
+  {
+    "id": "accessory-10",
+    "name": "Couteau",
+    "category": "accessory",
+    "description": "Proposition facultative, à adapter ensemble.",
+    "image": "",
+    "value": "Couteau"
+  },
+  {
+    "id": "accessory-11",
+    "name": "Pince",
+    "category": "accessory",
+    "description": "Proposition facultative, à adapter ensemble.",
+    "image": "",
+    "value": "Pince"
+  },
+  {
+    "id": "accessory-12",
+    "name": "Roulette",
+    "category": "accessory",
+    "description": "Proposition facultative, à adapter ensemble.",
+    "image": "",
+    "value": "Roulette"
   }
 ]
