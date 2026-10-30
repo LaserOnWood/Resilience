@@ -88,6 +88,36 @@
   }
 }
 
+/* Cartes plus lisibles sur les petits téléphones */
+@media (max-width: 480px) {
+  .cards {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+    gap: 1rem;
+  }
+
+  .game-card,
+  .game-card:last-child {
+    grid-column: auto;
+    width: min(100%, 250px);
+    justify-self: center;
+  }
+
+  .card-frame {
+    padding: 0.5rem;
+  }
+
+  .card-category,
+  .card-index {
+    font-size: 0.7rem;
+  }
+
+  .card-description {
+    font-size: clamp(0.75rem, 3vw, 0.85rem);
+    line-height: 1.35;
+  }
+}
+
 @media (max-width: 370px) {
   .cards {
     gap: 0.45rem;
