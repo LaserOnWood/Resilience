@@ -88,19 +88,46 @@
   }
 }
 
-/* Cartes plus lisibles sur les petits téléphones */
+/* Éventail de cartes adapté aux petits téléphones */
 @media (max-width: 480px) {
-  .cards {
+  .cards-emergence {
     grid-template-columns: minmax(0, 1fr);
-    justify-items: center;
-    gap: 1rem;
+    min-height: clamp(240px, 72vw, 330px);
+    margin: 1.5rem 0;
+    position: relative;
   }
 
-  .game-card,
-  .game-card:last-child {
-    grid-column: auto;
-    width: min(100%, 250px);
+  .cards-emergence .game-card,
+  .cards-emergence .game-card:last-child {
+    grid-column: 1;
+    grid-row: 1;
+    width: min(64vw, 220px);
     justify-self: center;
+    align-self: center;
+  }
+
+  .cards-emergence .game-card:nth-child(1) {
+    --card-start-x: -90%;
+    --card-rotation: -18deg;
+    --card-end-x: -24px;
+    --card-end-rotation: -12deg;
+    z-index: 1;
+  }
+
+  .cards-emergence .game-card:nth-child(2) {
+    --card-start-x: 0%;
+    --card-rotation: 0deg;
+    --card-end-x: 0px;
+    --card-end-rotation: 0deg;
+    z-index: 2;
+  }
+
+  .cards-emergence .game-card:nth-child(3) {
+    --card-start-x: 90%;
+    --card-rotation: 18deg;
+    --card-end-x: 24px;
+    --card-end-rotation: 12deg;
+    z-index: 3;
   }
 
   .card-frame {
@@ -113,19 +140,19 @@
   }
 
   .card-description {
-    font-size: clamp(0.75rem, 3vw, 0.85rem);
+    font-size: clamp(0.7rem, 3vw, 0.85rem);
     line-height: 1.35;
   }
 }
 
 @media (max-width: 370px) {
-  .cards {
-    gap: 0.75rem;
+  .cards-emergence {
+    min-height: 235px;
   }
 
-  .game-card,
-  .game-card:last-child {
-    width: min(100%, 250px);
+  .cards-emergence .game-card,
+  .cards-emergence .game-card:last-child {
+    width: min(62vw, 195px);
   }
 
   .card-frame {
