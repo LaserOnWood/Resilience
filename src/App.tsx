@@ -576,7 +576,7 @@ export default function App() {
         <div className="footer-controls" aria-label="Préférences">
           <button
             type="button"
-            className="footer-toggle"
+            className="sound-toggle footer-toggle"
             onClick={toggleSound}
             aria-pressed={soundEnabled}
           >
@@ -584,7 +584,7 @@ export default function App() {
           </button>
           <button
             type="button"
-            className="footer-toggle"
+            className="sound-toggle footer-toggle"
             onClick={toggleAnimations}
             aria-pressed={!animationsEnabled}
           >
