@@ -1501,3 +1501,41 @@ footer {
     animation: none;
   }
 }
+
+
+/* Contrôle sonore collector */
+
+.sound-toggle {
+  padding: 0.45rem 0.75rem;
+  border: 1px solid #c7a66b88;
+  border-radius: 999px;
+  background: #260d19;
+  color: #f0d8a0;
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition:
+    background 200ms ease,
+    border-color 200ms ease;
+}
+
+.sound-toggle:hover {
+  background: #491326;
+  border-color: #f0d8a0;
+}
+
+.sound-toggle[aria-pressed="true"] {
+  border-color: #f0d8a0;
+  background: #491326;
+}
+
+.sound-toggle:focus-visible {
+  outline: 2px solid #f0d8a0;
+  outline-offset: 3px;
+}
+
+@media (max-width: 480px) {
+  .sound-toggle {
+    padding: 0.4rem 0.55rem;
+    font-size: 0.7rem;
+  }
+}

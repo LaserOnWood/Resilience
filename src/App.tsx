@@ -1,5 +1,6 @@
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { playSound, unlockAudio } from './lib/sound';
 import { createDraw, drawToken } from './lib/game';
 import type { Draw, Card } from './types/game';
 
@@ -58,20 +59,83 @@ export default function App() {
   const [tokenVisible, setTokenVisible] = useState(false);
   const [opening, setOpening] = useState(false);
 
+
+  const [soundEnabled, setSoundEnabled] = useState(false);
+  const soundEnabledRef = useRef(false);
+  const soundTimers = useRef<number[]>([]);
+
+  const clearSoundTimers = () => {
+    soundTimers.current.forEach(window.clearTimeout);
+    soundTimers.current = [];
+  };
+
+  useEffect(() => {
+    return () => {
+      soundTimers.current.forEach(window.clearTimeout);
+    };
+  }, []);
+
+  const toggleSound = async () => {
+    if (soundEnabledRef.current) {
+      soundEnabledRef.current = false;
+      setSoundEnabled(false);
+      clearSoundTimers();
+      return;
+    }
+
+    try {
+      await unlockAudio();
+      soundEnabledRef.current = true;
+      setSoundEnabled(true);
+      playSound('sparkle');
+    } catch {
+      soundEnabledRef.current = false;
+      setSoundEnabled(false);
+    }
+  };
+
+  const scheduleSound = (name: 'tear' | 'sparkle', delay: number) => {
+    const timer = window.setTimeout(() => {
+      if (soundEnabledRef.current) playSound(name);
+      soundTimers.current = soundTimers.current.filter(id => id !== timer);
+    }, delay);
+
+    soundTimers.current.push(timer);
+  };
+
+
+  
   const start = () => {
     if (opening) return;
+
+    clearSoundTimers();
 
     setDraw(createDraw());
     setRevealed([]);
     setTokenVisible(false);
     setOpening(true);
+
+    if (soundEnabledRef.current) {
+      playSound('foil');
+      scheduleSound('tear', 850);
+      scheduleSound('sparkle', 1450);
+    }
   };
 
+
+  
   const revealCard = (index: number) => {
+    if (revealed.includes(index)) return;
+
+    if (soundEnabledRef.current) {
+      playSound('card');
+    }
+
     setRevealed(old =>
       old.includes(index) ? old : [...old, index],
     );
   };
+
 
   if (!adult) {
     return (
@@ -110,6 +174,9 @@ export default function App() {
     <main className="shell">
       <header className="top">
         <span className="brand">✦ Résilience</span>
+        <button type="button" className="sound-toggle" onClick={toggleSound} aria-pressed={soundEnabled} aria-label={soundEnabled ? 'Désactiver le son' : 'Activer le son'}> {soundEnabled ? '♪ Son activé' : '♪ Son désactivé'}
+        </button>
+
         <button className="text-button" onClick={() => setScreen('rules')}>
           Règles et sécurité
         </button>
