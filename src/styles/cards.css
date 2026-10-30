@@ -1,0 +1,489 @@
+/* Grille des cartes */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(0.5rem, 2vw, 1.25rem);
+  margin: 2rem 0;
+  align-items: start;
+}
+
+/* Structure des cartes */
+
+.game-card {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  aspect-ratio: 5 / 7;
+  padding: 0;
+  overflow: visible;
+  border: 0;
+  border-radius: 0.85rem;
+  background: transparent;
+  color: var(--ivory);
+  perspective: 1200px;
+  text-align: center;
+  transition: transform 250ms ease;
+}
+
+.game-card:not(:disabled):hover {
+  transform: translateY(-8px);
+  background: transparent;
+}
+
+.game-card:not(:disabled):hover .card-back {
+  border-color: var(--gold-light);
+  box-shadow:
+    0 14px 35px #000b,
+    0 0 18px #c7a66b35,
+    inset 0 0 0 2px #26151a;
+}
+
+.game-card:disabled.face-up {
+  opacity: 1;
+  cursor: default;
+}
+
+.game-card:disabled.face-up:hover {
+  transform: none;
+}
+
+.card-inner {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  transform-style: preserve-3d;
+  transition: transform 750ms cubic-bezier(0.2, 0.75, 0.25, 1);
+}
+
+.game-card.face-up .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  position: absolute;
+  inset: 0;
+  display: block;
+  padding: 5px;
+  overflow: hidden;
+  border: 1px solid var(--gold);
+  border-radius: inherit;
+  box-shadow:
+    0 14px 30px #0009,
+    inset 0 0 0 2px #26151a;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.card-frame {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  flex-direction: column;
+  align-items: center;
+  padding: clamp(0.35rem, 1.4vw, 0.9rem);
+  overflow: hidden;
+  border: 1px solid #c7a66b99;
+  border-radius: 0.55rem;
+}
+
+.card-frame::before,
+.card-frame::after {
+  position: absolute;
+  z-index: 1;
+  color: var(--gold);
+  font-family: Georgia, serif;
+  font-size: clamp(0.8rem, 2vw, 1.4rem);
+  line-height: 1;
+  pointer-events: none;
+}
+
+.card-frame::before {
+  content: "❧";
+  top: 3px;
+  left: 5px;
+}
+
+.card-frame::after {
+  content: "❧";
+  right: 5px;
+  bottom: 3px;
+  transform: rotate(180deg);
+}
+
+/* Dos commun */
+
+.card-back {
+  background:
+    radial-gradient(circle at 50% 45%, #74334b 0%, transparent 48%),
+    linear-gradient(145deg, #451b2c, var(--plum) 72%);
+}
+
+.card-back .card-frame {
+  justify-content: space-between;
+  background:
+    repeating-linear-gradient(
+      45deg,
+      transparent 0,
+      transparent 11px,
+      #c7a66b09 12px,
+      transparent 13px
+    );
+}
+
+.card-back-top,
+.card-back-bottom {
+  color: var(--gold-light);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(0.42rem, 0.8vw, 0.7rem);
+  letter-spacing: 0.15em;
+  text-align: center;
+}
+
+.card-back-center {
+  display: flex;
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.2rem, 1vw, 0.7rem);
+}
+
+.card-back-ornament {
+  color: var(--gold);
+  font-family: Georgia, serif;
+  font-size: clamp(0.9rem, 2.5vw, 1.8rem);
+}
+
+
+/* Emblème officiel au dos des cartes */
+
+.card-back-emblem {
+  display: grid;
+  width: clamp(3.5rem, 10vw, 7rem);
+  max-width: 85%;
+  aspect-ratio: 1;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.card-back-emblem-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+
+  filter: drop-shadow(0 0 12px #c7a66b55);
+
+  transition:
+    transform 350ms ease,
+    filter 350ms ease;
+}
+
+/* Léger éclat lorsque la carte est survolée */
+
+.game-card:not(:disabled):hover .card-back-emblem-image {
+  transform: scale(1.06);
+  filter: drop-shadow(0 0 18px #f0d8a088);
+}
+
+
+.card-back-title {
+  max-width: 100%;
+  color: var(--gold-light);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(0.6rem, 1.7vw, 1.3rem);
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  overflow-wrap: anywhere;
+  text-shadow: 0 2px 8px #000;
+}
+
+/* Face avant */
+
+.card-front {
+  transform: rotateY(180deg);
+  background:
+    radial-gradient(circle at 50% 38%, #57263a 0%, transparent 58%),
+    linear-gradient(155deg, #361b28, #110c13);
+}
+
+
+/* Reflet doré lors de la révélation */
+
+.card-front::after {
+  content: "";
+  position: absolute;
+  inset: -30% -60%;
+  z-index: 5;
+  pointer-events: none;
+  background: linear-gradient(
+    110deg,
+    transparent 38%,
+    #f0d8a022 45%,
+    #fff0c877 50%,
+    #f0d8a022 55%,
+    transparent 62%
+  );
+  transform: translateX(-70%) rotate(8deg);
+  opacity: 0;
+}
+
+.game-card.face-up .card-front::after {
+  animation: card-golden-shine 1.1s ease-out 0.25s;
+}
+
+@keyframes card-golden-shine {
+  0% {
+    transform: translateX(-70%) rotate(8deg);
+    opacity: 0;
+  }
+
+  25% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(70%) rotate(8deg);
+    opacity: 0;
+  }
+}
+
+
+.card-front .card-frame {
+  justify-content: space-between;
+  gap: 0.35rem;
+  background: linear-gradient(145deg, #ffffff04, #00000022);
+}
+
+.card-front-heading {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  gap: 0.25rem;
+  align-items: center;
+  padding: 0 0.3rem 0.45rem;
+  border-bottom: 1px solid #c7a66b80;
+}
+
+.card-category,
+.card-index {
+  color: var(--gold-light);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(0.55rem, 1.2vw, 0.85rem);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.card-artwork {
+  display: flex;
+  width: 100%;
+  min-height: 0;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(0.2rem, 1vw, 0.7rem);
+  padding: 0.3rem 0;
+}
+
+.card-artwork-ornament {
+  color: var(--gold);
+  font-family: Georgia, serif;
+  font-size: clamp(0.85rem, 2.5vw, 1.7rem);
+  line-height: 1;
+}
+
+.card-name {
+  display: block;
+  width: 100%;
+  color: var(--ivory);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(0.9rem, 2.4vw, 1.9rem);
+  font-weight: 700;
+  line-height: 1.12;
+  overflow-wrap: anywhere;
+  text-shadow: 0 2px 12px #000;
+}
+
+.card-description {
+  display: -webkit-box;
+  width: 100%;
+  max-height: 30%;
+  overflow: auto;
+  color: #e4d2c8;
+  font-size: clamp(0.6rem, 1.2vw, 0.85rem);
+  font-weight: 400;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+  scrollbar-width: thin;
+}
+
+.card-front-footer {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.2rem;
+  padding-top: 0.4rem;
+  border-top: 1px solid #c7a66b80;
+  color: var(--gold);
+  font-family: Georgia, serif;
+  font-size: clamp(0.5rem, 1vw, 0.7rem);
+  letter-spacing: 0.08em;
+}
+
+/* Personnalisation par catégorie */
+
+.card-number .card-name,
+.card-zone .card-name,
+.card-accessory .card-name {
+  font-size: clamp(1rem, 3vw, 2rem);
+}
+
+.card-number .card-name {
+  color: var(--gold-light);
+}
+
+.card-number .card-artwork {
+  background: radial-gradient(
+    ellipse at center,
+    #c7a66b16,
+    transparent 65%
+  );
+}
+
+.card-zone .card-artwork {
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    #a3284b38,
+    transparent 70%
+  );
+}
+
+.card-zone .card-name {
+  color: var(--gold-light);
+}
+
+.card-accessory .card-artwork {
+  background: radial-gradient(
+    ellipse at center,
+    #c7a66b1f,
+    transparent 68%
+  );
+}
+
+.card-accessory .card-name {
+  color: var(--gold-light);
+}
+
+/* Apparition progressive des cartes */
+
+
+/* =========================================
+   ÉMERGENCE DES TROIS CARTES COLLECTOR
+   ========================================= */
+
+.cards-emergence {
+  perspective: 1200px;
+  isolation: isolate;
+}
+
+.cards-emergence .game-card {
+  --card-start-x: 0px;
+  --card-rotation: 0deg;
+  --card-delay: 0ms;
+
+  animation:
+    collector-card-emergence
+    1150ms
+    cubic-bezier(0.16, 1, 0.3, 1)
+    var(--card-delay)
+    backwards;
+
+  transform-origin: center bottom;
+  will-change: transform, opacity;
+}
+
+/* Première carte : envol vers la gauche */
+.cards-emergence .game-card:nth-child(1) {
+  --card-start-x: 75%;
+  --card-rotation: -14deg;
+  --card-delay: 0ms;
+}
+
+/* Deuxième carte : sortie centrale */
+.cards-emergence .game-card:nth-child(2) {
+  --card-start-x: 0%;
+  --card-rotation: 0deg;
+  --card-delay: 170ms;
+}
+
+/* Troisième carte : envol vers la droite */
+.cards-emergence .game-card:nth-child(3) {
+  --card-start-x: -75%;
+  --card-rotation: 14deg;
+  --card-delay: 340ms;
+}
+
+/* Sortie du booster et déploiement en éventail */
+@keyframes collector-card-emergence {
+  0% {
+    opacity: 0;
+    transform:
+      translate(var(--card-start-x), 100px)
+      scale(0.35)
+      rotate(var(--card-rotation))
+      rotateX(35deg);
+
+    filter: brightness(2.2) blur(5px);
+  }
+
+  35% {
+    opacity: 1;
+    transform:
+      translate(var(--card-start-x), -30px)
+      scale(0.8)
+      rotate(var(--card-rotation))
+      rotateX(12deg);
+
+    filter: brightness(1.6) blur(0);
+  }
+
+  65% {
+    opacity: 1;
+    transform:
+      translate(0, -18px)
+      scale(1.05)
+      rotate(0deg)
+      rotateX(0);
+
+    filter: brightness(1.2);
+  }
+
+  85% {
+    transform:
+      translate(0, 5px)
+      scale(0.98)
+      rotate(0deg);
+
+    filter: brightness(1);
+  }
+
+  100% {
+    opacity: 1;
+    transform:
+      translate(0, 0)
+      scale(1)
+      rotate(0deg);
+
+    filter: brightness(1);
+  }
+}

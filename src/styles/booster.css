@@ -1,0 +1,644 @@
+/* Illustration provisoire du booster */
+
+
+.packet {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  width: 190px;
+  height: 270px;
+  margin: 2rem auto;
+  padding: 1.5rem 1rem;
+  overflow: hidden;
+
+  border: 2px solid var(--gold);
+  border-radius: 5px;
+
+  background:
+    linear-gradient(115deg, transparent 15%, #ffffff0c 28%, transparent 42%),
+    linear-gradient(135deg, #59172c 0%, #260d19 35%, #491326 62%, #170b13 100%);
+
+  box-shadow:
+    0 18px 35px #0009,
+    0 0 28px #a3284b35,
+    inset 0 0 0 4px var(--plum),
+    inset 0 0 0 5px #c7a66b66;
+
+  color: var(--gold-light);
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+/* Emblème provisoire */
+.packet-emblem {
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  color: var(--gold-light);
+  font-size: 2.3rem;
+  text-shadow: 0 0 14px #c7a66b55;
+}
+
+.packet-emblem-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 12px #c7a66b55);
+}
+
+/* Nom de la marque */
+.packet-brand {
+  color: var(--ivory);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-shadow: 0 2px 8px #0009;
+}
+
+/* Mention collector */
+.packet-edition {
+  margin-top: 0.2rem;
+  padding: 0.35rem 0.45rem;
+  border-top: 1px solid var(--gold);
+  border-bottom: 1px solid var(--gold);
+  color: var(--gold-light);
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  white-space: nowrap;
+}
+
+
+/* Texture et plis métalliques du booster */
+
+.packet::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      102deg,
+      transparent 8%,
+      #ffffff13 13%,
+      transparent 18%,
+      #00000025 23%,
+      transparent 29%
+    ),
+    linear-gradient(
+      78deg,
+      transparent 68%,
+      #ffffff12 74%,
+      #00000030 79%,
+      transparent 85%
+    ),
+    linear-gradient(
+      110deg,
+      transparent 20%,
+      #ffffff0b 38%,
+      #ffffff1c 44%,
+      transparent 52%
+    );
+}
+
+
+/* Soudures décoratives du sachet */
+.packet::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 7px;
+  border: 1px solid #c7a66b45;
+  pointer-events: none;
+}
+
+/* Finitions métalliques du booster collector */
+
+.packet {
+  background:
+    /* Soudures horizontales */
+    repeating-linear-gradient(
+      90deg,
+      #c7a66b35 0px,
+      #ffffff12 2px,
+      #170d1440 4px,
+      #c7a66b35 6px
+    ) top / 100% 10px no-repeat,
+
+    repeating-linear-gradient(
+      90deg,
+      #c7a66b35 0px,
+      #ffffff12 2px,
+      #170d1440 4px,
+      #c7a66b35 6px
+    ) bottom / 100% 10px no-repeat,
+
+    /* Reflets du sachet */
+    linear-gradient(
+      115deg,
+      transparent 15%,
+      #ffffff0c 28%,
+      transparent 42%
+    ),
+
+    /* Fond métallisé */
+    linear-gradient(
+      135deg,
+      #59172c 0%,
+      #260d19 35%,
+      #491326 62%,
+      #170b13 100%
+    );
+
+}
+
+
+/* Animation d'ouverture du booster - conservée */
+
+.packet {
+  --opening-duration: 2.4s;
+}
+
+/* Tous les effets restent derrière le contenu */
+.packet-emblem,
+.packet-brand,
+.packet-edition {
+  position: relative;
+  z-index: 2;
+}
+
+/* Ligne de déchirure */
+.packet-tear {
+  position: absolute;
+  z-index: 5;
+  top: 19px;
+  left: 5%;
+  width: 90%;
+  height: 3px;
+  opacity: 0;
+  pointer-events: none;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--gold),
+    #fff8d9,
+    var(--gold-light),
+    transparent
+  );
+
+  box-shadow:
+    0 0 12px var(--gold-light),
+    0 0 25px var(--gold);
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+/* Partie supérieure détachable du sachet */
+.packet-top-seal {
+  position: absolute;
+  z-index: 6;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  pointer-events: none;
+
+  border: 1px solid var(--gold);
+  background:
+    repeating-linear-gradient(
+      90deg,
+      #a77b45 0px,
+      var(--gold-light) 2px,
+      #46232b 4px,
+      #a77b45 6px
+    );
+  box-shadow: 0 3px 8px #0007;
+}
+
+/* Lumière qui s'échappe du paquet */
+.packet-light {
+  position: absolute;
+  z-index: 4;
+  top: 20px;
+  left: 50%;
+  width: 125%;
+  height: 100px;
+  opacity: 0;
+  pointer-events: none;
+
+  background: radial-gradient(
+    ellipse at center,
+    #fff8d9 0%,
+    #f0d8a0cc 18%,
+    #c7a66b55 42%,
+    transparent 72%
+  );
+
+  filter: blur(10px);
+  transform: translateX(-50%) scale(0.2);
+}
+
+
+/* =========================================
+   OUVERTURE PHYSIQUE DU SACHET
+   ========================================= */
+
+/* Cavité sombre visible à l'intérieur */
+.packet-opening-gap {
+  position: absolute;
+  z-index: 3;
+  top: 18px;
+  left: 5%;
+  width: 90%;
+  height: 0;
+  opacity: 0;
+  pointer-events: none;
+
+  background: linear-gradient(
+    180deg,
+    #050207 0%,
+    #170812 45%,
+    #3d1b27 85%,
+    #c7a66b55 100%
+  );
+
+  box-shadow:
+    inset 0 5px 10px #000,
+    0 0 12px #0009;
+
+  transform-origin: top center;
+}
+
+/* Matière métallisée des deux lèvres */
+.packet-lip {
+  position: absolute;
+  z-index: 5;
+  left: 5%;
+  width: 90%;
+  height: 7px;
+  pointer-events: none;
+
+  background: linear-gradient(
+    180deg,
+    #fff0c2 0%,
+    var(--gold) 24%,
+    #78502e 65%,
+    #29121b 100%
+  );
+
+  box-shadow:
+    0 2px 5px #000b,
+    0 0 5px #c7a66b55;
+
+  opacity: 0;
+}
+
+/* Lèvre supérieure */
+.packet-lip-top {
+  top: 17px;
+  transform-origin: top center;
+  border-radius: 30% 60% 20% 40%;
+}
+
+/* Lèvre inférieure */
+.packet-lip-bottom {
+  top: 21px;
+  transform-origin: bottom center;
+  border-radius: 40% 20% 60% 30%;
+
+  background: linear-gradient(
+    180deg,
+    #160912 0%,
+    #805533 35%,
+    #e0bd7b 75%,
+    #fff0c2 100%
+  );
+}
+
+/* Activation synchronisée avec l'ouverture existante */
+.packet.opening .packet-opening-gap {
+  animation: packet-gap-open 2.4s ease-out forwards;
+}
+
+.packet.opening .packet-lip-top {
+  animation: packet-lip-upper 2.4s ease-out forwards;
+}
+
+.packet.opening .packet-lip-bottom {
+  animation: packet-lip-lower 2.4s ease-out forwards;
+}
+
+/* La cavité apparaît après la déchirure */
+@keyframes packet-gap-open {
+  0%, 42% {
+    height: 0;
+    opacity: 0;
+  }
+
+  48% {
+    height: 3px;
+    opacity: 1;
+  }
+
+  65% {
+    height: 13px;
+    opacity: 1;
+  }
+
+  82% {
+    height: 23px;
+    opacity: 1;
+  }
+
+  100% {
+    height: 30px;
+    opacity: 0;
+  }
+}
+
+/* La lèvre supérieure se relève */
+@keyframes packet-lip-upper {
+  0%, 42% {
+    opacity: 0;
+    transform: translateY(0) scaleY(1);
+  }
+
+  48% {
+    opacity: 1;
+    transform: translateY(-2px) scaleY(1);
+  }
+
+  68% {
+    opacity: 1;
+    transform: translateY(-9px) scaleY(1.4);
+  }
+
+  85% {
+    opacity: 1;
+    transform: translateY(-16px) scaleY(1.6);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-22px) scaleY(1.8);
+  }
+}
+
+/* La lèvre inférieure s'abaisse */
+@keyframes packet-lip-lower {
+  0%, 42% {
+    opacity: 0;
+    transform: translateY(0) scaleY(1);
+  }
+
+  48% {
+    opacity: 1;
+    transform: translateY(2px) scaleY(1);
+  }
+
+  68% {
+    opacity: 1;
+    transform: translateY(7px) scaleY(1.3);
+  }
+
+  85% {
+    opacity: 1;
+    transform: translateY(13px) scaleY(1.5);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(18px) scaleY(1.7);
+  }
+}
+
+/* Déclenchement */
+.packet.opening {
+  overflow: visible;
+  clip-path: none;
+
+  animation:
+    packet-opening
+    var(--opening-duration)
+    cubic-bezier(0.2, 0.75, 0.25, 1)
+    forwards;
+}
+
+.packet.opening .packet-tear {
+  animation: packet-tearing 2.4s ease-out forwards;
+}
+
+.packet.opening .packet-top-seal {
+  animation: packet-seal-fly 2.4s ease-in-out forwards;
+}
+
+.packet.opening .packet-light {
+  animation: packet-light-burst 2.4s ease-out forwards;
+}
+
+/* Étincelles décoratives */
+.packet.opening::before,
+.packet.opening::after {
+  position: absolute;
+  z-index: 7;
+  color: #ffe3a8;
+  font-size: 2rem;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.packet.opening::before {
+  content: "✦";
+  top: 5%;
+  left: -15%;
+  animation: booster-sparkle-left 1.3s ease-out 0.75s forwards;
+}
+
+.packet.opening::after {
+  content: "✧";
+  right: -15%;
+  bottom: 15%;
+  animation: booster-sparkle-right 1.3s ease-out 0.9s forwards;
+}
+
+/* Animation principale : c'est elle qui termine l'ouverture */
+@keyframes packet-opening {
+  0% {
+    transform: scale(1) rotate(0);
+    filter: brightness(1);
+    opacity: 1;
+  }
+
+  15% {
+    transform: scale(1.035) rotate(-2deg);
+    filter: brightness(1.15);
+    opacity: 1;
+  }
+
+  30% {
+    transform: scale(1.05) rotate(2deg);
+    filter: brightness(1.3);
+    opacity: 1;
+  }
+
+  43% {
+    transform: scale(1.08) rotate(-1deg);
+    filter: brightness(1.6);
+    box-shadow:
+      0 0 35px #c7a66b88,
+      0 0 65px #a3284b88;
+    opacity: 1;
+  }
+
+  60% {
+    transform: scale(1.12) translateY(5px);
+    filter: brightness(1.9);
+    box-shadow:
+      0 0 65px #f0d8a099,
+      0 0 110px #c7a66b66;
+    opacity: 1;
+  }
+
+  78% {
+    transform: scale(1.16) translateY(12px);
+    filter: brightness(2.5);
+    opacity: 1;
+  }
+
+  90% {
+    transform: scale(1.22) translateY(20px);
+    filter: brightness(3);
+    opacity: 0.85;
+  }
+
+  100% {
+    transform: scale(0.8) translateY(35px);
+    filter: brightness(3);
+    opacity: 0;
+  }
+}
+
+/* Déchirure progressive */
+@keyframes packet-tearing {
+  0%, 29% {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+
+  35% {
+    opacity: 1;
+    transform: scaleX(0.3);
+  }
+
+  46% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+
+  65% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+
+  85%, 100% {
+    opacity: 0;
+    transform: scaleX(1);
+  }
+}
+
+/* La soudure supérieure se détache */
+@keyframes packet-seal-fly {
+  0%, 45% {
+    opacity: 1;
+    transform: translate(0, 0) rotate(0);
+  }
+
+  55% {
+    opacity: 1;
+    transform: translate(7px, -12px) rotate(8deg);
+  }
+
+  75% {
+    opacity: 1;
+    transform: translate(32px, -75px) rotate(24deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(65px, -125px) rotate(55deg);
+  }
+}
+
+/* Explosion de lumière */
+@keyframes packet-light-burst {
+  0%, 43% {
+    opacity: 0;
+    transform: translateX(-50%) scale(0.2);
+  }
+
+  55% {
+    opacity: 0.8;
+    transform: translateX(-50%) scale(0.7);
+  }
+
+  75% {
+    opacity: 1;
+    transform: translateX(-50%) scale(1.5);
+  }
+
+  90% {
+    opacity: 0.9;
+    transform: translateX(-50%) scale(2);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) scale(2.5);
+  }
+}
+
+
+@keyframes booster-sparkle-left {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0.4);
+  }
+
+  35% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-28px, -50px) scale(1.4);
+  }
+}
+
+@keyframes booster-sparkle-right {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0.4);
+  }
+
+  35% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(28px, 40px) scale(1.4);
+  }
+}

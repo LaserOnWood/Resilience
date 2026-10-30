@@ -1,0 +1,82 @@
+:root {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif;
+  color: var(--ivory);
+  background: var(--background);
+  font-synthesis: none;
+
+  --gold: #c7a66b;
+  --gold-light: #f0d8a0;
+  --gold-dark: #76552f;
+  --burgundy: #481526;
+  --ruby: #a3284b;
+  --ivory: #f3e7d5;
+  --plum: #170d14;
+
+  /* Couleurs fonctionnelles réutilisables */
+  --background: #09070c;
+  --text-muted: #baa5b0;
+  --text-soft: #c9b6be;
+  --rose-light: #f19db0;
+  --rose-pale: #f6e8eb;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at 75% 15%, #471321 0, transparent 35%),
+    radial-gradient(ellipse at 15% 80%, #25162f 0, transparent 40%),
+    var(--background);
+}
+
+button,
+a {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: 0;
+  border-radius: 0.7rem;
+  padding: 0.9rem 1.3rem;
+  background: #b72c4b;
+  color: white;
+  font-weight: 700;
+}
+
+button:hover:not(:disabled) {
+  background: #dc4162;
+}
+
+button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid var(--gold-light);
+  outline-offset: 4px;
+}
+
+/* Boutons secondaires et navigation */
+
+.secondary {
+  padding: 0.85rem 1.3rem;
+  border: 1px solid #845062;
+  border-radius: 0.7rem;
+  background: transparent;
+  color: var(--rose-pale);
+  text-decoration: none;
+}
+
+.text-button {
+  padding: 0.5rem;
+  background: transparent;
+  color: var(--rose-pale);
+}
