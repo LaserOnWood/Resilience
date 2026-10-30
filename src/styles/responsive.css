@@ -169,6 +169,14 @@
     transform: translate(var(--card-end-x), -8px) rotate(var(--card-end-rotation));
   }
 
+  /* Après l'éventail, annule aussi les rotations spécifiques aux cartes 1, 2 et 3. */
+  .cards-emergence.cards-flat .game-card:nth-child(1),
+  .cards-emergence.cards-flat .game-card:nth-child(2),
+  .cards-emergence.cards-flat .game-card:nth-child(3) {
+    transform: none;
+    rotate: none;
+  }
+
   .card-frame {
     padding: 0.5rem;
   }
