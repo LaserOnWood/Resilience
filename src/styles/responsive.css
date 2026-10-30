@@ -90,7 +90,7 @@
 
 /* Après la première révélation, les cartes passent sur une ligne chacune. */
 @media (max-width: 480px) {
-  .cards-emergence.cards-revealing {
+  .cards-emergence.cards-flat {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
     gap: 1rem;
@@ -99,8 +99,8 @@
     overflow: visible;
   }
 
-  .cards-emergence.cards-revealing .game-card,
-  .cards-emergence.cards-revealing .game-card:last-child {
+  .cards-emergence.cards-flat .game-card,
+  .cards-emergence.cards-flat .game-card:last-child {
     grid-column: 1;
     grid-row: auto;
     width: min(100%, 320px);
@@ -114,7 +114,7 @@
     transition: transform 220ms ease;
   }
 
-  .cards-emergence.cards-revealing .game-card:not(:disabled):hover {
+  .cards-emergence.cards-flat .game-card:not(:disabled):hover {
     transform: translateY(-3px);
   }
 
@@ -189,13 +189,13 @@
     min-height: 235px;
   }
 
-  .cards-emergence.cards-revealing {
+  .cards-emergence.cards-flat {
     grid-template-columns: minmax(0, 1fr);
     gap: 0.85rem;
   }
 
-  .cards-emergence.cards-revealing .game-card,
-  .cards-emergence.cards-revealing .game-card:last-child {
+  .cards-emergence.cards-flat .game-card,
+  .cards-emergence.cards-flat .game-card:last-child {
     width: min(100%, 300px);
   }
 
