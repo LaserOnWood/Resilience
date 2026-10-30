@@ -12,6 +12,8 @@
 
 .coin {
   position: relative;
+  will-change: transform;
+  transform: translateZ(0);
   z-index: 0;
   display: grid;
   width: clamp(116px, 26vw, 168px);
@@ -40,6 +42,7 @@
   isolation: isolate;
   -webkit-tap-highlight-color: transparent;
   transition: filter 220ms ease, box-shadow 220ms ease;
+  backface-visibility: hidden;
 }
 
 .coin::before,
@@ -174,8 +177,9 @@
   aspect-ratio: 1;
   border-radius: 50%;
   background: conic-gradient(from 0deg, transparent, #8db9ff2c, transparent, #e6f3ff45, transparent, #7f9ffb33, transparent);
-  filter: blur(8px);
+  filter: blur(5px);
   opacity: 0.22;
+  will-change: transform, opacity;
   pointer-events: none;
 }
 
@@ -199,7 +203,8 @@
   background: #f2f8ff;
   box-shadow: 0 0 7px 2px #a8d0ff, 0 0 16px #d6eaff;
   opacity: 0;
-  transform: translate(-50%, -50%) scale(0.2);
+  transform: translate3d(-50%, -50%, 0) scale(0.2);
+  will-change: transform, opacity;
 }
 
 .particle-1 { --dx: -88px; --dy: -52px; --delay: 0ms; }
@@ -216,7 +221,7 @@
 .particle-12 { --dx: 43px; --dy: 37px; --delay: 50ms; }
 
 .coin-revealed {
-  animation: coin-epic-toss 1.75s cubic-bezier(0.18, 0.82, 0.2, 1) both;
+  animation: coin-epic-toss 2.05s cubic-bezier(0.22, 0.72, 0.18, 1) both;
 }
 
 .coin-revealed::before {
@@ -228,15 +233,15 @@
 }
 
 .coin-revealed .coin-aura {
-  animation: coin-aura-surge 1.8s ease-out both;
+  animation: coin-aura-surge 2s ease-out both;
 }
 
 .coin-revealed .coin-particle {
-  animation: coin-particle-burst 1.15s cubic-bezier(0.15, 0.7, 0.2, 1) calc(0.62s + var(--delay)) both;
+  animation: coin-particle-burst 1.25s cubic-bezier(0.16, 0.68, 0.25, 1) calc(0.72s + var(--delay)) both;
 }
 
 .coin-revealed .coin-rim {
-  animation: coin-rim-flash 1.4s ease-out 0.5s both;
+  animation: coin-rim-flash 1.5s ease-out 0.62s both;
 }
 
 .coin-revealed .coin-question {
@@ -257,19 +262,19 @@
   font-family: Georgia, "Times New Roman", serif;
   font-size: clamp(1.05rem, 2.5vw, 1.3rem);
   text-shadow: 0 0 18px #b8c9e055, 0 0 32px #91b8ff22;
-  animation: token-phrase-arrive 650ms ease-out 0.72s both;
+  animation: token-phrase-arrive 650ms ease-out 0.82s both;
 }
 
 @keyframes coin-epic-toss {
-  0% { transform: translateY(0) rotate(0deg) scale(0.82); filter: brightness(1); }
-  13% { transform: translateY(-20px) rotate(110deg) scale(1.03); filter: brightness(1.4); }
-  34% { transform: translateY(-112px) rotate(430deg) scale(1.13); filter: brightness(1.8) drop-shadow(0 0 20px #a8d0ff); }
-  49% { transform: translateY(-125px) rotate(610deg) scale(1.16); filter: brightness(2) drop-shadow(0 0 30px #d7eaff); }
-  69% { transform: translateY(-5px) rotate(850deg) scale(0.91); filter: brightness(1.45); }
-  77% { transform: translateY(0) rotate(900deg) scale(1.04); filter: brightness(1.8); }
-  84% { transform: translateY(-13px) rotate(935deg) scale(0.99); filter: brightness(1.35); }
-  91% { transform: translateY(0) rotate(960deg) scale(1.015); filter: brightness(1.5); }
-  100% { transform: translateY(0) rotate(1080deg) scale(1); filter: brightness(1); }
+  0% { transform: translate3d(0, 0, 0) rotate(0deg) scale(0.9); filter: brightness(1); }
+  16% { transform: translate3d(0, -24px, 0) rotate(130deg) scale(1.02); filter: brightness(1.2); }
+  38% { transform: translate3d(0, -100px, 0) rotate(410deg) scale(1.1); filter: brightness(1.45); }
+  54% { transform: translate3d(0, -118px, 0) rotate(620deg) scale(1.12); filter: brightness(1.6); }
+  70% { transform: translate3d(0, -8px, 0) rotate(850deg) scale(0.96); filter: brightness(1.2); }
+  78% { transform: translate3d(0, 0, 0) rotate(900deg) scale(1.015); filter: brightness(1.45); }
+  86% { transform: translate3d(0, -7px, 0) rotate(935deg) scale(1); filter: brightness(1.18); }
+  93% { transform: translate3d(0, 0, 0) rotate(960deg) scale(1.005); filter: brightness(1.25); }
+  100% { transform: translate3d(0, 0, 0) rotate(1080deg) scale(1); filter: brightness(1); }
 }
 
 @keyframes coin-ring-burst {
@@ -279,16 +284,16 @@
 }
 
 @keyframes coin-aura-surge {
-  0% { transform: scale(0.45) rotate(0deg); opacity: 0.12; filter: blur(12px); }
-  38% { transform: scale(1.22) rotate(120deg); opacity: 0.95; filter: blur(4px); }
-  70% { transform: scale(1.5) rotate(210deg); opacity: 0.55; filter: blur(9px); }
-  100% { transform: scale(1.7) rotate(300deg); opacity: 0.08; filter: blur(15px); }
+  0% { transform: translateZ(0) scale(0.55) rotate(0deg); opacity: 0.12; }
+  35% { transform: translateZ(0) scale(1.18) rotate(100deg); opacity: 0.78; }
+  72% { transform: translateZ(0) scale(1.45) rotate(210deg); opacity: 0.4; }
+  100% { transform: translateZ(0) scale(1.65) rotate(300deg); opacity: 0.06; }
 }
 
 @keyframes coin-particle-burst {
-  0% { opacity: 0; transform: translate(-50%, -50%) scale(0.2); }
-  15% { opacity: 1; }
-  100% { opacity: 0; transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1.35); }
+  0% { opacity: 0; transform: translate3d(-50%, -50%, 0) scale(0.2); }
+  18% { opacity: 1; }
+  100% { opacity: 0; transform: translate3d(var(--dx), var(--dy), 0) scale(1.2); }
 }
 
 @keyframes coin-rim-flash {
@@ -298,8 +303,8 @@
 }
 
 @keyframes token-phrase-arrive {
-  from { opacity: 0; transform: translateY(14px) scale(0.96); filter: blur(4px); }
-  to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+  from { opacity: 0; transform: translate3d(0, 10px, 0) scale(0.98); }
+  to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
 }
 
 .animations-disabled .coin-revealed,
