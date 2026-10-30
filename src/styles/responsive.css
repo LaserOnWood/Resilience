@@ -86,7 +86,6 @@
   .card-index {
     font-size: 0.6rem;
   }
-
 }
 
 @media (max-width: 370px) {
@@ -139,13 +138,6 @@
   .packet.opening::before,
   .packet.opening::after {
     animation: none;
-  }
-}
-
-@media (max-width: 480px) {
-  .sound-toggle {
-    padding: 0.4rem 0.55rem;
-    font-size: 0.7rem;
   }
 }
 
