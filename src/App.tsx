@@ -64,6 +64,12 @@ export default function App() {
 
 
   const [soundEnabled, setSoundEnabled] = useState(false);
+  const [animationsEnabled, setAnimationsEnabled] = useState(() => {
+    const saved = localStorage.getItem('resilience-animations');
+    return saved === null
+      ? !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      : saved === 'enabled';
+  });
   const soundEnabledRef = useRef(false);
   const soundTimers = useRef<number[]>([]);
 
@@ -95,6 +101,12 @@ export default function App() {
       soundEnabledRef.current = false;
       setSoundEnabled(false);
     }
+  };
+
+  const toggleAnimations = () => {
+    const next = !animationsEnabled;
+    localStorage.setItem('resilience-animations', next ? 'enabled' : 'disabled');
+    setAnimationsEnabled(next);
   };
 
   const scheduleSound = (name: 'tear' | 'sparkle', delay: number) => {
@@ -134,9 +146,15 @@ export default function App() {
 
     setDraw(createDraw());
     setRevealed([]);
-    setFanSettled(false);
+    setFanSettled(!animationsEnabled);
     setTokenVisible(false);
-    setOpening(true);
+
+    if (animationsEnabled) {
+      setOpening(true);
+    } else {
+      setOpening(false);
+      setScreen('reveal');
+    }
 
     if (soundEnabledRef.current) {
       playSound('foil');
@@ -194,11 +212,9 @@ export default function App() {
   }
 
   return (
-    <main className="shell">
+    <main className={`shell${animationsEnabled ? '' : ' animations-disabled'}`}>
       <header className="top">
         <span className="brand">✦ Résilience</span>
-        <button type="button" className="sound-toggle" onClick={toggleSound} aria-pressed={soundEnabled} aria-label={soundEnabled ? 'Désactiver le son' : 'Activer le son'}> {soundEnabled ? '♪ Son activé' : '♪ Son désactivé'}
-        </button>
 
         <button className="text-button" onClick={() => setScreen('rules')}>
           Règles et sécurité
@@ -556,7 +572,27 @@ export default function App() {
   )}
 
 
-      <footer>Résilience · Prototype privé · Consentement avant tout</footer>
+      <footer>
+        <div className="footer-controls" aria-label="Préférences">
+          <button
+            type="button"
+            className="sound-toggle footer-toggle"
+            onClick={toggleSound}
+            aria-pressed={soundEnabled}
+          >
+            {soundEnabled ? '♪ Son activé' : '♪ Son désactivé'}
+          </button>
+          <button
+            type="button"
+            className="sound-toggle footer-toggle"
+            onClick={toggleAnimations}
+            aria-pressed={!animationsEnabled}
+          >
+            {animationsEnabled ? 'Animations activées' : 'Animations désactivées'}
+          </button>
+        </div>
+        <span>Résilience · Prototype privé · Consentement avant tout</span>
+      </footer>
     </main>
   );
 }
