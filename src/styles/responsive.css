@@ -101,7 +101,9 @@
   .cards-emergence .game-card:last-child {
     grid-column: 1;
     grid-row: 1;
-    width: min(64vw, 220px);
+    position: relative;
+    pointer-events: auto;
+    width: min(58vw, 200px);
     justify-self: center;
     align-self: center;
   }
@@ -109,7 +111,7 @@
   .cards-emergence .game-card:nth-child(1) {
     --card-start-x: -90%;
     --card-rotation: -18deg;
-    --card-end-x: -48px;
+    --card-end-x: -62px;
     --card-end-rotation: -14deg;
     z-index: 1;
   }
@@ -125,7 +127,7 @@
   .cards-emergence .game-card:nth-child(3) {
     --card-start-x: 90%;
     --card-rotation: 18deg;
-    --card-end-x: 48px;
+    --card-end-x: 62px;
     --card-end-rotation: 14deg;
     z-index: 2;
   }
@@ -152,7 +154,7 @@
 
   .cards-emergence .game-card,
   .cards-emergence .game-card:last-child {
-    width: min(62vw, 195px);
+    width: min(56vw, 180px);
   }
 
   .card-frame {
