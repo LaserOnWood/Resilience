@@ -433,21 +433,31 @@ export default function App() {
 
           <div className="token-area">
             <button
+              type="button"
               disabled={revealed.length !== 3}
               onClick={() => setTokenVisible(true)}
-              className="coin"
-              aria-label={
-                tokenVisible ? 'Jeton révélé' : 'Révéler le jeton'
-              }
+              className={`coin${tokenVisible ? ' coin-revealed' : ''}`}
+              aria-label={tokenVisible ? 'Jeton révélé' : 'Lancer le jeton pour révéler la phrase'}
+              aria-pressed={tokenVisible}
             >
-              {tokenVisible ? '✧' : '?'}
+              <span className="coin-rim" aria-hidden="true">
+                <span className="coin-face">
+                  <img
+                    src="/images/branding/embleme-resilience-transparent.png"
+                    alt=""
+                    className="coin-emblem"
+                  />
+                  {!tokenVisible && <span className="coin-question">?</span>}
+                  <span className="coin-inscription">RÉSILIENCE</span>
+                </span>
+              </span>
             </button>
 
-            <p>
+            <p className={tokenVisible ? 'token-phrase token-phrase-visible' : 'token-phrase'} aria-live="polite">
               {tokenVisible
                 ? draw.token.text
                 : revealed.length === 3
-                  ? 'Les trois cartes sont révélées : vous pouvez découvrir le jeton.'
+                  ? 'Lancez le jeton pour découvrir votre phrase.'
                   : 'Révélez les trois cartes avant le jeton.'}
             </p>
 
