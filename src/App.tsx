@@ -6,7 +6,6 @@ import type { Draw } from './types/game';
 import { getHistory, saveDraw, clearHistory } from './lib/history';
 import TokenFeature from './features/token/TokenFeature';
 import CardsRevealFeature from './features/cards/CardsRevealFeature';
-import { getCardPresentation } from './features/cards/cardPresentation';
 import BoosterFeature from './features/booster/BoosterFeature';
 import HistoryFeature from './features/history/HistoryFeature';
 import SummaryFeature from './features/cards/SummaryFeature';
