@@ -213,12 +213,27 @@ export default function App() {
 
   return (
     <main className={`shell${animationsEnabled ? '' : ' animations-disabled'}`}>
-      <header className="top">
-        <span className="brand">✦ Résilience</span>
+      <header className="top">     
+        <div className="header-controls" aria-label="Préférences">
+          <button
+            type="button"
+            className="sound-toggle footer-toggle"
+            onClick={toggleSound}
+            aria-pressed={soundEnabled}
+          >
+            {soundEnabled ? '♪ Son activé' : '♪ Son désactivé'}
+          </button>
+          <button
+            type="button"
+            className="sound-toggle footer-toggle"
+            onClick={toggleAnimations}
+            aria-pressed={!animationsEnabled}
+          >
+            {animationsEnabled ? 'Animations activées' : 'Animations désactivées'}
+          </button>
+        </div>
 
-        <button className="text-button" onClick={() => setScreen('rules')}>
-          Règles et sécurité
-        </button>
+        
       </header>
 
       {screen === 'welcome' && (
@@ -573,24 +588,9 @@ export default function App() {
 
 
       <footer>
-        <div className="footer-controls" aria-label="Préférences">
-          <button
-            type="button"
-            className="sound-toggle footer-toggle"
-            onClick={toggleSound}
-            aria-pressed={soundEnabled}
-          >
-            {soundEnabled ? '♪ Son activé' : '♪ Son désactivé'}
-          </button>
-          <button
-            type="button"
-            className="sound-toggle footer-toggle"
-            onClick={toggleAnimations}
-            aria-pressed={!animationsEnabled}
-          >
-            {animationsEnabled ? 'Animations activées' : 'Animations désactivées'}
-          </button>
-        </div>
+        <button className="text-button" onClick={() => setScreen('rules')}>
+          Règles et sécurité
+        </button>
         <span>Résilience · Prototype privé · Consentement avant tout</span>
       </footer>
     </main>
