@@ -73,6 +73,17 @@ export default function App() {
     const next = !animationsEnabled;
     localStorage.setItem('resilience-animations', next ? 'enabled' : 'disabled');
     setAnimationsEnabled(next);
+
+    if (!next) {
+      // Finalise proprement les animations en cours pour éviter un écran bloqué.
+      setFanSettled(true);
+
+      if (opening) {
+        clearSoundTimers();
+        setOpening(false);
+        setScreen('reveal');
+      }
+    }
   };
 
   const scheduleSound = (name: 'tear' | 'sparkle', delay: number) => {
