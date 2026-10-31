@@ -217,6 +217,24 @@ export default function App() {
 
 
         
+        <div className="header-controls" aria-label="Préférences">
+          <button
+            type="button"
+            className="sound-toggle footer-toggle"
+            onClick={toggleSound}
+            aria-pressed={soundEnabled}
+          >
+            {soundEnabled ? '♪ Son activé' : '♪ Son désactivé'}
+          </button>
+          <button
+            type="button"
+            className="sound-toggle footer-toggle"
+            onClick={toggleAnimations}
+            aria-pressed={!animationsEnabled}
+          >
+            {animationsEnabled ? 'Animations activées' : 'Animations désactivées'}
+          </button>
+        </div>
       </header>
 
       {screen === 'welcome' && (
@@ -590,24 +608,7 @@ export default function App() {
         <button className="text-button" onClick={() => setScreen('rules')}>
           Règles et sécurité
         </button>
-        <div className="footer-controls" aria-label="Préférences">
-          <button
-            type="button"
-            className="sound-toggle footer-toggle"
-            onClick={toggleSound}
-            aria-pressed={soundEnabled}
-          >
-            {soundEnabled ? '♪ Son activé' : '♪ Son désactivé'}
-          </button>
-          <button
-            type="button"
-            className="sound-toggle footer-toggle"
-            onClick={toggleAnimations}
-            aria-pressed={!animationsEnabled}
-          >
-            {animationsEnabled ? 'Animations activées' : 'Animations désactivées'}
-          </button>
-        </div>
+
         <span>Résilience · Prototype privé · Consentement avant tout</span>
       </footer>
     </main>
