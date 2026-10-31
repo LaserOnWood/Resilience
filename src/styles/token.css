@@ -293,13 +293,14 @@
     transform: perspective(900px) translate3d(0, 5px, 0) rotateX(565deg) rotateY(710deg) rotateZ(750deg) scale(1.03);
   }
   89% {
-    transform: perspective(900px) translate3d(0, -5px, 0) rotateX(580deg) rotateY(735deg) rotateZ(775deg) scale(0.99);
+    transform: perspective(900px) translate3d(0, -5px, 0) rotateX(650deg) rotateY(680deg) rotateZ(1010deg) scale(0.99);
   }
   95% {
-    transform: perspective(900px) translate3d(0, 2px, 0) rotateX(590deg) rotateY(750deg) rotateZ(795deg) scale(1.01);
+    transform: perspective(900px) translate3d(0, 2px, 0) rotateX(700deg) rotateY(710deg) rotateZ(1060deg) scale(1.01);
   }
   100% {
-    transform: perspective(900px) translate3d(0, 0, 0) rotateX(600deg) rotateY(765deg) rotateZ(810deg) scale(1);
+    /* Full rotations leave the coin resting face-on instead of edge-on. */
+    transform: perspective(900px) translate3d(0, 0, 0) rotateX(720deg) rotateY(720deg) rotateZ(1080deg) scale(1);
   }
 }
 
