@@ -180,7 +180,8 @@
   aspect-ratio: 1;
   border-radius: 50%;
   background: conic-gradient(from 0deg, transparent, #8db9ff2c, transparent, #e6f3ff45, transparent, #7f9ffb33, transparent);
-  filter: blur(5px);
+  /* Un flou léger évite un gros coût de composition sur mobile. */
+  filter: blur(2px);
   opacity: 0.22;
   will-change: transform, opacity;
   pointer-events: none;
@@ -204,10 +205,10 @@
   height: 5px;
   border-radius: 50%;
   background: #f2f8ff;
-  box-shadow: 0 0 7px 2px #a8d0ff, 0 0 16px #d6eaff;
+  /* Une seule lueur réduit le coût de rendu des particules. */
+  box-shadow: 0 0 8px 2px #a8d0ff;
   opacity: 0;
   transform: translate3d(-50%, -50%, 0) scale(0.2);
-  will-change: transform, opacity;
 }
 
 .particle-1 { --dx: -88px; --dy: -52px; --delay: 0ms; }
@@ -324,9 +325,10 @@
 }
 
 @keyframes coin-rim-flash {
-  0%, 100% { filter: brightness(1); }
-  35% { filter: brightness(2.2) drop-shadow(0 0 10px #e4f1ff); }
-  58% { filter: brightness(1.35); }
+  /* Éviter d'animer filter/drop-shadow : opacity est plus fluide sur mobile. */
+  0%, 100% { opacity: 1; }
+  35% { opacity: 0.88; }
+  58% { opacity: 0.96; }
 }
 
 @keyframes token-phrase-arrive {
