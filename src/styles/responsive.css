@@ -287,3 +287,35 @@
 .shell.animations-disabled .cards-emergence {
   will-change: auto;
 }
+
+/* Les préférences restent en haut, sur une seule ligne, y compris sur mobile. */
+.top .header-controls {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.top .header-controls .footer-toggle {
+  width: auto;
+  min-width: 0;
+  min-height: 40px;
+  padding: 0.55rem 0.8rem;
+  white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+  .top .header-controls {
+    justify-content: center;
+    gap: clamp(0.3rem, 1.5vw, 0.6rem);
+  }
+
+  .top .header-controls .footer-toggle {
+    flex: 0 1 auto;
+    padding: 0.5rem clamp(0.4rem, 2vw, 0.8rem);
+    font-size: clamp(0.68rem, 2.8vw, 0.85rem);
+  }
+}
