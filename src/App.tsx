@@ -2,54 +2,13 @@
 import { useEffect, useRef, useState } from 'react';
 import { playSound, unlockAudio } from './lib/sound';
 import { createDraw, drawToken } from './lib/game';
-import type { Draw, Card } from './types/game';
+import type { Draw } from './types/game';
 import { getHistory, saveDraw, clearHistory } from './lib/history';
 import TokenFeature from './features/token/TokenFeature';
+import CardsRevealFeature from './features/cards/CardsRevealFeature';
+import { getCardPresentation } from './features/cards/cardPresentation';
 
 type Screen = 'welcome' | 'rules' | 'booster' | 'reveal' | 'summary' | 'history';
-
-function getCardPresentation(card: Card) {
-  switch (card.category) {
-    case 'hits':
-      return {
-        category: 'Nombre',
-        ornament: '✧',
-        className: 'card-number',
-      };
-    case 'body-zone':
-      return {
-        category: 'Zone',
-        ornament: '◇',
-        className: 'card-zone',
-      };
-    case 'accessory':
-      return {
-        category: 'Accessoire',
-        ornament: '✦',
-        className: 'card-accessory',
-      };
-  }
-}
-
-
-function getCardNameStyle(name: string): React.CSSProperties {
-  const length = name.length;
-
-  if (length > 28) {
-    return { fontSize: 'clamp(0.8rem, 2.5vw, 1.1rem)' };
-  }
-
-  if (length > 22) {
-    return { fontSize: 'clamp(0.9rem, 3vw, 1.3rem)' };
-  }
-
-  if (length > 16) {
-    return { fontSize: 'clamp(1rem, 3.5vw, 1.6rem)' };
-  }
-
-  return {};
-}
-
 
 export default function App() {
   const [adult, setAdult] = useState(
@@ -352,95 +311,13 @@ export default function App() {
               : `${revealed.length} carte${revealed.length > 1 ? 's' : ''} sur 3 révélée${revealed.length > 1 ? 's' : ''}. Choisissez la prochaine !`}
           </p>
 
-          <div
-            className={`cards cards-emergence${fanSettled ? ' cards-flat' : ''}`}
-            onAnimationEnd={event => {
-              if (
-                event.target === event.currentTarget.lastElementChild &&
-                event.animationName === 'collector-card-emergence'
-              ) {
-                setFanSettled(true);
-              }
-            }}
-          >
-            {draw.cards.map((card, i) => {
-              const isRevealed = revealed.includes(i);
-              const presentation = getCardPresentation(card);
-
-              return (
-                <button
-                  key={card.id}
-                  type="button"
-                  className={`game-card ${presentation.className}${isRevealed ? ' face-up' : ''}`}
-                  onClick={() => revealCard(i)}
-                  disabled={isRevealed}
-                  aria-label={
-                    isRevealed
-                      ? `Carte ${i + 1} révélée : ${card.name}`
-                      : `Révéler la carte ${i + 1}`
-                  }
-                >
-                  <span className="card-inner">
-                    <span className="card-face card-back" aria-hidden="true">
-                      <span className="card-frame">
-                        <span className="card-back-top">COLLECTION PRIVÉE</span>
-
-                        <span className="card-back-center">
-                          <span className="card-back-ornament">✧</span>
-                          <span className="card-back-emblem">
-                            <img src="/images/branding/embleme-resilience-transparent.png" alt="" className="card-back-emblem-image"/>
-                          </span>
-                          <span className="card-back-title">RÉSILIENCE</span>
-                          <span className="card-back-ornament">✧</span>
-                        </span>
-
-                        <span className="card-back-bottom">
-                          ÉDITION COLLECTOR
-                        </span>
-                      </span>
-                    </span>
-
-                    <span className="card-face card-front">
-                      <span className="card-frame">
-                        <span className="card-front-heading">
-                          <span className="card-category">
-                            {presentation.category}
-                          </span>
-                          <span className="card-index">
-                            {String(i + 1).padStart(2, '0')}
-                          </span>
-                        </span>
-
-                        <span className="card-artwork">
-                          <span className="card-artwork-ornament">
-                            {presentation.ornament}
-                          </span>
-                          
-                          <span className="card-name" style={getCardNameStyle(card.name)}>
-                            {card.name}
-                          </span>
-
-                          <span className="card-artwork-ornament">
-                            {presentation.ornament}
-                          </span>
-                        </span>
-
-                        <span className="card-description">
-                          {card.description}
-                        </span>
-
-                        <span className="card-front-footer">
-                          <span>✦</span>
-                          <span>RÉSILIENCE</span>
-                          <span>✦</span>
-                        </span>
-                      </span>
-                    </span>
-                  </span>
-                </button>
-              );
-            })}
-          </div>
+          <CardsRevealFeature
+            cards={draw.cards}
+            revealed={revealed}
+            fanSettled={fanSettled}
+            onRevealCard={revealCard}
+            onFanSettled={() => setFanSettled(true)}
+          />
 
           {revealed.length < 3 && (
             <p className="next-hint">
