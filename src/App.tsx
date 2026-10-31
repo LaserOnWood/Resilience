@@ -214,7 +214,24 @@ export default function App() {
   return (
     <main className={`shell${animationsEnabled ? '' : ' animations-disabled'}`}>
       <header className="top">     
-
+        <div className="header-controls" aria-label="Préférences">
+          <button
+            type="button"
+            className="sound-toggle footer-toggle"
+            onClick={toggleSound}
+            aria-pressed={soundEnabled}
+          >
+            {soundEnabled ? '♪ Son activé' : '♪ Son désactivé'}
+          </button>
+          <button
+            type="button"
+            className="sound-toggle footer-toggle"
+            onClick={toggleAnimations}
+            aria-pressed={!animationsEnabled}
+          >
+            {animationsEnabled ? 'Animations activées' : 'Animations désactivées'}
+          </button>
+        </div>
 
         
       </header>
@@ -431,37 +448,21 @@ export default function App() {
 
           <div className="token-area">
             <button
-              type="button"
               disabled={revealed.length !== 3}
               onClick={() => setTokenVisible(true)}
-              className={`coin${tokenVisible ? ' coin-revealed' : ''}`}
-              aria-label={tokenVisible ? 'Jeton révélé' : 'Lancer le jeton pour révéler la phrase'}
-              aria-pressed={tokenVisible}
+              className="coin"
+              aria-label={
+                tokenVisible ? 'Jeton révélé' : 'Révéler le jeton'
+              }
             >
-              <span className="coin-aura" aria-hidden="true" />
-              <span className="coin-particles" aria-hidden="true">
-                {Array.from({ length: 12 }, (_, i) => (
-                  <span key={i} className={`coin-particle particle-${i + 1}`} />
-                ))}
-              </span>
-              <span className="coin-rim" aria-hidden="true">
-                <span className="coin-face">
-                  <img
-                    src="/images/branding/embleme-resilience-transparent.png"
-                    alt=""
-                    className="coin-emblem"
-                  />
-                  {!tokenVisible && <span className="coin-question">?</span>}
-                  <span className="coin-inscription">RÉSILIENCE</span>
-                </span>
-              </span>
+              {tokenVisible ? '✧' : '?'}
             </button>
 
-            <p className={tokenVisible ? 'token-phrase token-phrase-visible' : 'token-phrase'} aria-live="polite">
+            <p>
               {tokenVisible
                 ? draw.token.text
                 : revealed.length === 3
-                  ? 'Lancez le jeton pour découvrir votre phrase.'
+                  ? 'Les trois cartes sont révélées : vous pouvez découvrir le jeton.'
                   : 'Révélez les trois cartes avant le jeton.'}
             </p>
 
@@ -590,24 +591,6 @@ export default function App() {
         <button className="text-button" onClick={() => setScreen('rules')}>
           Règles et sécurité
         </button>
-        <div className="footer-controls" aria-label="Préférences">
-          <button
-            type="button"
-            className="sound-toggle footer-toggle"
-            onClick={toggleSound}
-            aria-pressed={soundEnabled}
-          >
-            {soundEnabled ? '♪ Son activé' : '♪ Son désactivé'}
-          </button>
-          <button
-            type="button"
-            className="sound-toggle footer-toggle"
-            onClick={toggleAnimations}
-            aria-pressed={!animationsEnabled}
-          >
-            {animationsEnabled ? 'Animations activées' : 'Animations désactivées'}
-          </button>
-        </div>
         <span>Résilience · Prototype privé · Consentement avant tout</span>
       </footer>
     </main>
