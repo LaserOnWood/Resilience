@@ -10,6 +10,9 @@ import { getCardPresentation } from './features/cards/cardPresentation';
 import BoosterFeature from './features/booster/BoosterFeature';
 import HistoryFeature from './features/history/HistoryFeature';
 import SummaryFeature from './features/cards/SummaryFeature';
+import WelcomeFeature from './features/home/WelcomeFeature';
+import RulesFeature from './features/home/RulesFeature';
+import SettingsControls from './features/settings/SettingsControls';
 
 type Screen = 'welcome' | 'rules' | 'booster' | 'reveal' | 'summary' | 'history';
 
@@ -180,72 +183,27 @@ export default function App() {
 
 
         
-        <div className="header-controls" aria-label="Préférences">
-          <button
-            type="button"
-            className="sound-toggle footer-toggle"
-            onClick={toggleSound}
-            aria-pressed={soundEnabled}
-          >
-            {soundEnabled ? '♪ Son activé' : '♪ Son désactivé'}
-          </button>
-          <button
-            type="button"
-            className="sound-toggle footer-toggle"
-            onClick={toggleAnimations}
-            aria-pressed={!animationsEnabled}
-          >
-            {animationsEnabled ? 'Animations activées' : 'Animations désactivées'}
-          </button>
-        </div>
+        <SettingsControls
+          soundEnabled={soundEnabled}
+          animationsEnabled={animationsEnabled}
+          onToggleSound={toggleSound}
+          onToggleAnimations={toggleAnimations}
+        />
       </header>
 
       {screen === 'welcome' && (
-        <section className="panel hero">
-          <p className="eyebrow">Une expérience de cartes à partager</p>
-          <h1 className="welcome-logo">
-            <img src="/images/branding/logo-resilience-transparent.png" alt="Résilience" className="welcome-logo-image"/>
-          </h1>
-          <p className="tagline">
-            Ouvrir un paquet de cartes ne vous procurera jamais autant de
-            sensations.
-          </p>
-          <p>
-            Trois cartes. Un jeton. <br/>
-            Une proposition que vous êtes toujours
-            libres d'adapter ou de refuser.
-          </p>
-          <div className="actions">
-            <button onClick={() => setScreen('rules')}> Commencer </button>
-            <button className="secondary" onClick={() => setScreen('history')}> Mon historique ({history.length}) </button>
-          </div>
-        </section>
+        <WelcomeFeature
+          historyCount={history.length}
+          onStart={() => setScreen('rules')}
+          onHistory={() => setScreen('history')}
+        />
       )}
 
       {screen === 'rules' && (
-        <section className="panel">
-          <p className="eyebrow">Avant de jouer</p>
-          <h1>Règles et sécurité</h1>
-          <p>
-            Chaque booster propose un nombre, une zone et un accessoire, puis
-            une phrase neutre. Révélez les trois cartes dans l'ordre de votre
-            choix, puis découvrez le jeton.
-          </p>
-          <p>
-            Chaque proposition peut être refusée, adaptée ou interrompue à
-            tout moment, sans justification. Discutez des limites et
-            privilégiez toujours la sécurité.
-          </p>
-          <div className="actions">
-            <button onClick={() => setScreen('booster')}>J'ai compris</button>
-            <button
-              className="secondary"
-              onClick={() => setScreen('welcome')}
-            >
-              Accueil
-            </button>
-          </div>
-        </section>
+        <RulesFeature
+          onContinue={() => setScreen('booster')}
+          onHome={() => setScreen('welcome')}
+        />
       )}
 
       {screen === 'booster' && (
