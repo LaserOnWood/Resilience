@@ -12,6 +12,7 @@ import SummaryFeature from './features/cards/SummaryFeature';
 import WelcomeFeature from './features/home/WelcomeFeature';
 import RulesFeature from './features/home/RulesFeature';
 import SettingsControls from './features/settings/SettingsControls';
+import AgeGateFeature from './features/home/AgeGateFeature';
 
 type Screen = 'welcome' | 'rules' | 'booster' | 'reveal' | 'summary' | 'history';
 
@@ -145,34 +146,12 @@ export default function App() {
 
   if (!adult) {
     return (
-      <main className="shell">
-        <section className="panel">
-          <p className="eyebrow">Accès réservé aux adultes</p>
-          <h1>Résilience</h1>
-          <p>
-            Cette expérience s'adresse exclusivement aux personnes majeures.
-            Le consentement et la possibilité de refuser ou d'arrêter priment
-            sur tout tirage.
-          </p>
-          <div className="actions">
-            <button
-              onClick={() => {
-                sessionStorage.setItem('resilience-adult', 'yes');
-                setAdult(true);
-              }}
-            >
-              Je confirme avoir 18 ans ou plus
-            </button>
-            <a className="secondary" href="https://www.google.com/">
-              Quitter
-            </a>
-          </div>
-          <small>
-            Déclaration de majorité provisoire : ne constitue pas à elle seule
-            une vérification d'âge réglementaire.
-          </small>
-        </section>
-      </main>
+      <AgeGateFeature
+        onConfirm={() => {
+          sessionStorage.setItem('resilience-adult', 'yes');
+          setAdult(true);
+        }}
+      />
     );
   }
 
