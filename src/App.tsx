@@ -9,6 +9,7 @@ import CardsRevealFeature from './features/cards/CardsRevealFeature';
 import { getCardPresentation } from './features/cards/cardPresentation';
 import BoosterFeature from './features/booster/BoosterFeature';
 import HistoryFeature from './features/history/HistoryFeature';
+import SummaryFeature from './features/cards/SummaryFeature';
 
 type Screen = 'welcome' | 'rules' | 'booster' | 'reveal' | 'summary' | 'history';
 
@@ -299,21 +300,11 @@ export default function App() {
       )}
 
       {screen === 'summary' && draw && (
-        <section className="panel">
-          <p className="eyebrow">Tirage terminé</p>
-          <h1>Récapitulatif</h1>
-          {draw.cards.map(card => (
-            <p key={card.id}>
-              <strong>{card.name}</strong> — {card.description}
-            </p>
-          ))}
-          <p className="quote">{draw.token.text}</p>
-          <p>Ce résultat est une proposition, jamais une obligation.</p>
-          <div className="actions">
-            <button onClick={() => setScreen('booster')}> Nouveau booster </button>
-            <button className="secondary" onClick={() => setScreen('history')}> Voir mon historique </button>
-          </div>
-        </section>
+        <SummaryFeature
+          draw={draw}
+          onNewBooster={() => setScreen('booster')}
+          onHistory={() => setScreen('history')}
+        />
       )}
 
 {screen === 'history' && (
