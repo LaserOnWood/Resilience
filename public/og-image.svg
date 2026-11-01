@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="42%" r="75%">
+      <stop offset="0" stop-color="#4d0c28"/>
+      <stop offset=".55" stop-color="#240713"/>
+      <stop offset="1" stop-color="#090407"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff0bf"/>
+      <stop offset=".45" stop-color="#c7a66b"/>
+      <stop offset="1" stop-color="#8c542a"/>
+    </linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <g fill="none" stroke="#8e3b57" opacity=".3">
+    <path d="M0 120 Q240 10 430 140 T820 100 T1200 70" stroke-width="2"/>
+    <path d="M0 470 Q240 330 430 475 T820 420 T1200 500" stroke-width="3"/>
+    <path d="M80 0 Q210 190 70 340 M1120 0 Q980 180 1130 360" stroke-width="1.5"/>
+  </g>
+  <g transform="translate(600 220)" filter="url(#glow)">
+    <circle r="104" fill="none" stroke="url(#gold)" stroke-width="3"/>
+    <circle r="91" fill="none" stroke="#c7a66b" stroke-width="1.5"/>
+    <path d="M0 -150 L8 -27 L0 -8 L-8 -27 Z M0 150 L-5 28 L0 8 L5 28 Z" fill="url(#gold)"/>
+    <path d="M-150 0 L-27 -8 L-8 0 L-27 8 Z M150 0 L27 -8 L8 0 L27 8 Z" fill="url(#gold)"/>
+    <path d="M-42 -65 H16 C76 -65 79 10 20 18 C81 27 75 91 12 91 H-42 V-65 Z M-14 -39 V65 H10 C49 65 50 34 9 34 H-5 V9 H10 C46 9 46 -39 10 -39 Z" fill="url(#gold)" fill-rule="evenodd"/>
+    <path d="M0 -116 L5 -102 L19 -97 L5 -92 L0 -78 L-5 -92 L-19 -97 L-5 -102 Z" fill="#fff0bf"/>
+  </g>
+  <text x="600" y="430" text-anchor="middle" fill="url(#gold)" font-family="Georgia,serif" font-size="86" letter-spacing="13">RÉSILIENCE</text>
+  <path d="M220 466 H980" stroke="#c7a66b" stroke-width="1"/>
+  <path d="M600 455 L609 466 L600 477 L591 466 Z" fill="#c7a66b"/>
+  <text x="600" y="525" text-anchor="middle" fill="#f0d8a0" font-family="Georgia,serif" font-size="24" letter-spacing="4">PLUS QU’UN JEU, UNE INVITATION À SE RECONSTRUIRE</text>
+  <text x="600" y="580" text-anchor="middle" fill="#c7a66b" font-family="Arial,sans-serif" font-size="15" letter-spacing="3">RESILIENCE-KINKY.VERCEL.APP</text>
+</svg>
