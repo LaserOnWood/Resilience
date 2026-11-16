@@ -9,6 +9,11 @@
   "background_color": "#12070c",
   "theme_color": "#12070c",
   "icons": [
-    { "src": "/favicon.jpg", "sizes": "any", "type": "image/jpg", "purpose": "any" }
+    {
+      "src": "/favicon.jpg",
+      "sizes": "any",
+      "type": "image/jpg",
+      "purpose": "any"
+    }
   ]
 }
