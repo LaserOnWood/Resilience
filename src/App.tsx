@@ -1,7 +1,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { playSound, unlockAudio } from './lib/sound';
-import { createDraw, drawToken } from './lib/game';
+import { createDraw, drawToken, rerollCard } from './lib/game';
 import type { Draw } from './types/game';
 import { getHistory, saveDraw, clearHistory } from './lib/history';
 import TokenFeature from './features/token/TokenFeature';
@@ -23,6 +23,7 @@ export default function App() {
   const [screen, setScreen] = useState<Screen>('welcome');
   const [draw, setDraw] = useState<Draw | null>(null);
   const [revealed, setRevealed] = useState<number[]>([]);
+  const [rerolled, setRerolled] = useState<number[]>([]);
   const [fanSettled, setFanSettled] = useState(false);
   const [tokenVisible, setTokenVisible] = useState(false);
   const [opening, setOpening] = useState(false);
@@ -124,6 +125,7 @@ export default function App() {
 
     setDraw(createDraw());
     setRevealed([]);
+    setRerolled([]);
     setFanSettled(!animationsEnabled);
     setTokenVisible(false);
 
@@ -155,6 +157,26 @@ export default function App() {
     );
   };
 
+
+  const handleRerollCard = (index: number) => {
+    if (!draw || !revealed.includes(index)) return;
+
+    if (soundEnabledRef.current) {
+      playSound('card');
+    }
+
+    setDraw(current =>
+      current
+        ? {
+            ...current,
+            cards: current.cards.map((card, i) =>
+              i === index ? rerollCard(card) : card,
+            ),
+          }
+        : current,
+    );
+    setRerolled(old => (old.includes(index) ? old : [...old, index]));
+  };
 
   if (!adult) {
     return (
@@ -221,16 +243,22 @@ export default function App() {
           <CardsRevealFeature
             cards={draw.cards}
             revealed={revealed}
+            rerolled={rerolled}
             fanSettled={fanSettled}
             onRevealCard={revealCard}
+            onRerollCard={handleRerollCard}
             onFanSettled={() => setFanSettled(true)}
           />
 
-          {revealed.length < totalCards && (
-            <p className="next-hint">
-              Touchez la carte de votre choix pour la retourner.
-            </p>
-          )}
+          <p className="next-hint">
+            {revealed.length < totalCards
+              ? `Touchez la carte de votre choix pour la retourner.${
+                  revealed.length > 0
+                    ? ' Touchez une carte révélée pour la relancer.'
+                    : ''
+                }`
+              : 'Touchez une carte révélée pour la relancer.'}
+          </p>
 
           <TokenFeature
             canReveal={revealed.length === totalCards}

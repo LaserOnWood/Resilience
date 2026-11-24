@@ -16,6 +16,25 @@ export function pickOne<T>(items: readonly T[], random: () => number = Math.rand
   return items[Math.floor(value * items.length)];
 }
 
+const cardPools: Record<Category, readonly Card[]> = {
+  hits: hits as Card[],
+  'body-zone': zones as Card[],
+  accessory: accessories as Card[],
+  furniture: furniture as Card[],
+};
+
+/**
+ * Relance une carte dans sa propre catégorie.
+ * La carte actuelle est exclue pour qu'une relance change toujours le résultat,
+ * sauf si la catégorie ne contient qu'une seule carte.
+ */
+export function rerollCard(card: Card, random: () => number = Math.random): Card {
+  const pool = cardPools[card.category];
+  const others = pool.filter(item => item.id !== card.id);
+
+  return pickOne(others.length > 0 ? others : pool, random);
+}
+
 export function drawToken(random: () => number = Math.random): TokenPhrase {
   return pickOne(phrases, random);
 }

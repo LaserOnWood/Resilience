@@ -4,7 +4,8 @@ import zones from '../src/data/body-zones.json';
 import accessories from '../src/data/accessories.json';
 import furniture from '../src/data/furniture.json';
 import phrases from '../src/data/token-phrases.json';
-import { createDraw, drawToken, pickOne, validateData } from '../src/lib/game';
+import { createDraw, drawToken, pickOne, rerollCard, validateData } from '../src/lib/game';
+import type { Card } from '../src/types/game';
 
 describe('Validation des données', () => {
   it('valide les données actuelles du jeu', () => {
@@ -74,5 +75,30 @@ describe('Création d’un tirage', () => {
   it('tire un jeton de manière déterministe avec un hasard contrôlé', () => {
     expect(drawToken(() => 0).id).toBe(phrases[0].id);
     expect(drawToken(() => 0.999999).id).toBe(phrases[phrases.length - 1].id);
+  });
+});
+
+describe('Relance d’une carte', () => {
+  it('reste dans la même catégorie et change toujours de carte', () => {
+    for (const group of [hits, zones, accessories, furniture]) {
+      for (const card of group as Card[]) {
+        for (const value of [0, 0.5, 0.999999]) {
+          const next = rerollCard(card, () => value);
+
+          expect(next.category).toBe(card.category);
+          if (group.length > 1) expect(next.id).not.toBe(card.id);
+        }
+      }
+    }
+  });
+
+  it('peut atteindre toutes les autres cartes de la catégorie', () => {
+    const current = hits[0] as Card;
+    const others = hits.slice(1).map(card => card.id);
+    const reached = new Set(
+      others.map((_, i) => rerollCard(current, () => i / others.length).id),
+    );
+
+    expect([...reached].sort()).toEqual([...others].sort());
   });
 });

@@ -1,11 +1,17 @@
 import type { Draw } from '../../types/game';
-import { getCardNameStyle, getCardPresentation } from './cardPresentation';
+import {
+  getCardDescriptionStyle,
+  getCardNameStyle,
+  getCardPresentation,
+} from './cardPresentation';
 
 interface CardsRevealFeatureProps {
   cards: Draw['cards'];
   revealed: number[];
+  rerolled: number[];
   fanSettled: boolean;
   onRevealCard: (index: number) => void;
+  onRerollCard: (index: number) => void;
   onFanSettled: () => void;
 }
 
@@ -13,8 +19,10 @@ interface CardsRevealFeatureProps {
 export default function CardsRevealFeature({
   cards,
   revealed,
+  rerolled,
   fanSettled,
   onRevealCard,
+  onRerollCard,
   onFanSettled,
 }: CardsRevealFeatureProps) {
   return (
@@ -35,18 +43,21 @@ export default function CardsRevealFeature({
 
         return (
           <button
-            key={card.id}
+            key={i}
             type="button"
             className={`game-card ${presentation.className}${isRevealed ? ' face-up' : ''}`}
-            onClick={() => onRevealCard(i)}
-            disabled={isRevealed}
+            onClick={() => (isRevealed ? onRerollCard(i) : onRevealCard(i))}
             aria-label={
               isRevealed
-                ? `Carte ${i + 1} révélée : ${card.name}`
+                ? `Carte ${i + 1} révélée : ${card.name}. Activer pour relancer cette carte.`
                 : `Révéler la carte ${i + 1}`
             }
           >
-            <span className="card-inner">
+            {/* La clé change à chaque relance : la carte se retourne à nouveau. */}
+            <span
+              key={card.id}
+              className={`card-inner${rerolled.includes(i) ? ' rerolled' : ''}`}
+            >
               <span className="card-face card-back" aria-hidden="true">
                 <span className="card-frame">
                   <span className="card-back-top">COLLECTION PRIVÉE</span>
@@ -91,7 +102,10 @@ export default function CardsRevealFeature({
                     </span>
                   </span>
 
-                  <span className="card-description">
+                  <span
+                    className="card-description"
+                    style={getCardDescriptionStyle(card.description)}
+                  >
                     {card.description}
                   </span>
 

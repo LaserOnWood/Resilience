@@ -30,20 +30,34 @@ export function getCardPresentation(card: Card) {
   }
 }
 
+/**
+ * Les valeurs `fontSize` servent aux petits écrans ; `--name-scale` est utilisé
+ * sur grand écran, où la taille du texte suit la largeur de la carte (cards.css).
+ */
 export function getCardNameStyle(name: string): CSSProperties {
   const length = name.length;
 
   if (length > 28) {
-    return { fontSize: "clamp(0.8rem, 2.5vw, 1.1rem)" };
+    return { fontSize: "clamp(0.8rem, 2.5vw, 1.1rem)", "--name-scale": 0.62 } as CSSProperties;
   }
 
   if (length > 22) {
-    return { fontSize: "clamp(0.9rem, 3vw, 1.3rem)" };
+    return { fontSize: "clamp(0.9rem, 3vw, 1.3rem)", "--name-scale": 0.74 } as CSSProperties;
   }
 
   if (length > 16) {
-    return { fontSize: "clamp(1rem, 3.5vw, 1.6rem)" };
+    return { fontSize: "clamp(1rem, 3.5vw, 1.6rem)", "--name-scale": 0.86 } as CSSProperties;
   }
+
+  return {};
+}
+
+/** Réduit la description sur grand écran lorsqu'elle est longue. */
+export function getCardDescriptionStyle(description: string): CSSProperties {
+  const length = description.length;
+
+  if (length > 110) return { "--desc-scale": 0.72 } as CSSProperties;
+  if (length > 70) return { "--desc-scale": 0.85 } as CSSProperties;
 
   return {};
 }

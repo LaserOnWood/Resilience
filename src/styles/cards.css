@@ -24,6 +24,8 @@
   perspective: 1200px;
   text-align: center;
   transition: transform 250ms ease;
+  /* Permet de dimensionner le texte selon la largeur de la carte (unités cqw). */
+  container-type: inline-size;
 }
 
 .game-card:not(:disabled):hover {
@@ -60,6 +62,21 @@
 
 .game-card.face-up .card-inner {
   transform: rotateY(180deg);
+}
+
+/* Relance d'une carte déjà révélée : elle se retourne de nouveau. */
+.card-inner.rerolled {
+  animation: card-reroll-flip 750ms cubic-bezier(0.2, 0.75, 0.25, 1) both;
+}
+
+@keyframes card-reroll-flip {
+  from {
+    transform: rotateY(0deg);
+  }
+
+  to {
+    transform: rotateY(180deg);
+  }
 }
 
 .card-face {
@@ -507,5 +524,65 @@
       rotate(var(--card-end-rotation));
 
     filter: brightness(1);
+  }
+}
+
+/* =========================================
+   GRAND ÉCRAN : TEXTE PROPORTIONNEL À LA CARTE
+   Le texte suit la largeur de la carte (cqw) pour ne jamais être rogné.
+   Les !important l'emportent sur les tailles en ligne (petits écrans).
+   ========================================= */
+
+@media (min-width: 721px) {
+  .card-frame {
+    padding: 6cqw;
+  }
+
+  .card-frame::before,
+  .card-frame::after {
+    font-size: 7cqw;
+  }
+
+  .card-front .card-frame {
+    gap: 2cqw;
+  }
+
+  .card-front-heading {
+    padding: 0 8cqw 3cqw;
+  }
+
+  .card-category,
+  .card-index {
+    font-size: 6cqw;
+  }
+
+  .card-artwork {
+    gap: 2.5cqw;
+    padding: 1cqw 0;
+  }
+
+  .card-artwork-ornament {
+    font-size: 8cqw;
+  }
+
+  .card-name,
+  .card-number .card-name,
+  .card-zone .card-name,
+  .card-accessory .card-name,
+  .card-furniture .card-name {
+    font-size: calc(12cqw * var(--name-scale, 1)) !important;
+  }
+
+  .card-description {
+    display: block;
+    max-height: none;
+    overflow: visible;
+    font-size: calc(6.4cqw * var(--desc-scale, 1));
+    line-height: 1.35;
+  }
+
+  .card-front-footer {
+    padding-top: 2.5cqw;
+    font-size: 4.6cqw;
   }
 }
