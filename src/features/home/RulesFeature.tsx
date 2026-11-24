@@ -9,9 +9,9 @@ export default function RulesFeature({ onContinue, onHome }: RulesFeatureProps) 
       <p className="eyebrow">Avant de jouer</p>
       <h1>Règles et sécurité</h1>
       <p>
-        Chaque booster propose un nombre, une zone et un accessoire, puis
-        une phrase neutre. Révélez les trois cartes dans l'ordre de votre
-        choix, puis découvrez le jeton.
+        Chaque booster propose un nombre, une zone, un accessoire et un
+        meuble, puis une phrase neutre. Révélez les quatre cartes dans
+        l'ordre de votre choix, puis découvrez le jeton.
       </p>
       <p>
         Chaque proposition peut être refusée, adaptée ou interrompue à

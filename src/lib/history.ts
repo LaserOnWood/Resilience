@@ -19,13 +19,13 @@ function isStoredDraw(value: unknown): value is Draw {
     typeof draw.createdAt === 'string' &&
     !Number.isNaN(Date.parse(draw.createdAt)) &&
     Array.isArray(draw.cards) &&
-    draw.cards.length === 3 &&
+    (draw.cards.length === 3 || draw.cards.length === 4) &&
     draw.cards.every(card =>
       card &&
       typeof card.id === 'string' &&
       typeof card.name === 'string' &&
       typeof card.description === 'string' &&
-      ['hits', 'body-zone', 'accessory'].includes(card.category)
+      ['hits', 'body-zone', 'accessory', 'furniture'].includes(card.category)
     ) &&
     draw.token !== null &&
     typeof draw.token === 'object' &&

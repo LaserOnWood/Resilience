@@ -1,6 +1,7 @@
 import hits from '../data/hits.json';
 import zones from '../data/body-zones.json';
 import accessories from '../data/accessories.json';
+import furniture from '../data/furniture.json';
 import phrases from '../data/token-phrases.json';
 import type { Card, Draw, TokenPhrase, Category } from '../types/game';
 
@@ -27,6 +28,7 @@ export function createDraw(random: () => number = Math.random): Draw {
       pickOne(hits, random) as Card,
       pickOne(zones, random) as Card,
       pickOne(accessories, random) as Card,
+      pickOne(furniture, random) as Card,
     ],
     token: drawToken(random),
   };
@@ -69,9 +71,12 @@ export function validateData(): boolean {
     && accessories.every(card => typeof card.value === 'string' && card.value.trim().length > 0)
     && accessories.some(card => card.name === 'Sans accessoire' && card.value === 'Sans accessoire');
 
+  const validFurniture = isValidCardGroup(furniture as Card[], 'furniture')
+    && furniture.every(card => typeof card.value === 'string' && card.value.trim().length > 0);
+
   const validPhrases = phrases.length > 0
     && hasUniqueNonEmptyIds(phrases)
     && phrases.every(phrase => typeof phrase.text === 'string' && phrase.text.trim().length > 0);
 
-  return validHits && validZones && validAccessories && validPhrases;
+  return validHits && validZones && validAccessories && validFurniture && validPhrases;
 }

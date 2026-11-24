@@ -2,7 +2,7 @@
 
 .cards {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: clamp(0.5rem, 2vw, 1.25rem);
   margin: 2rem 0;
   align-items: start;
@@ -343,7 +343,8 @@
 
 .card-number .card-name,
 .card-zone .card-name,
-.card-accessory .card-name {
+.card-accessory .card-name,
+.card-furniture .card-name {
   font-size: clamp(1rem, 3vw, 2rem);
 }
 
@@ -384,6 +385,18 @@
   color: var(--gold-light);
 }
 
+.card-furniture .card-artwork {
+  background: radial-gradient(
+    ellipse at center,
+    #8f3a5a2b,
+    transparent 68%
+  );
+}
+
+.card-furniture .card-name {
+  color: var(--gold-light);
+}
+
 /* Apparition progressive des cartes */
 
 
@@ -416,23 +429,30 @@
 
 /* Première carte : envol vers la gauche */
 .cards-emergence .game-card:nth-child(1) {
-  --card-start-x: 75%;
+  --card-start-x: 150%;
   --card-rotation: -14deg;
   --card-delay: 0ms;
 }
 
-/* Deuxième carte : sortie centrale */
+/* Deuxième carte : sortie centre gauche */
 .cards-emergence .game-card:nth-child(2) {
-  --card-start-x: 0%;
-  --card-rotation: 0deg;
+  --card-start-x: 50%;
+  --card-rotation: -5deg;
   --card-delay: 170ms;
 }
 
-/* Troisième carte : envol vers la droite */
+/* Troisième carte : sortie centre droit */
 .cards-emergence .game-card:nth-child(3) {
-  --card-start-x: -75%;
-  --card-rotation: 14deg;
+  --card-start-x: -50%;
+  --card-rotation: 5deg;
   --card-delay: 340ms;
+}
+
+/* Quatrième carte : envol vers la droite */
+.cards-emergence .game-card:nth-child(4) {
+  --card-start-x: -150%;
+  --card-rotation: 14deg;
+  --card-delay: 510ms;
 }
 
 /* Sortie du booster et déploiement en éventail */

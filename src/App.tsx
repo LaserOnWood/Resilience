@@ -27,6 +27,7 @@ export default function App() {
   const [tokenVisible, setTokenVisible] = useState(false);
   const [opening, setOpening] = useState(false);
   const [history, setHistory] = useState<Draw[]>(() => getHistory());
+  const totalCards = draw?.cards.length ?? 4;
 
 
   const [soundEnabled, setSoundEnabled] = useState(false);
@@ -98,7 +99,7 @@ export default function App() {
 
   
   const finishDraw = () => {
-    if (!draw || revealed.length !== 3 || !tokenVisible) return;
+    if (!draw || revealed.length !== totalCards || !tokenVisible) return;
 
     const updated = saveDraw(draw);
     setHistory(updated);
@@ -212,9 +213,9 @@ export default function App() {
           <h1>Votre tirage</h1>
 
           <p className="reveal-progress" aria-live="polite">
-            {revealed.length === 3
-              ? 'Les trois cartes sont révélées.'
-              : `${revealed.length} carte${revealed.length > 1 ? 's' : ''} sur 3 révélée${revealed.length > 1 ? 's' : ''}. Choisissez la prochaine !`}
+            {revealed.length === totalCards
+              ? 'Toutes les cartes sont révélées.'
+              : `${revealed.length} carte${revealed.length > 1 ? 's' : ''} sur ${totalCards} révélée${revealed.length > 1 ? 's' : ''}. Choisissez la prochaine !`}
           </p>
 
           <CardsRevealFeature
@@ -225,14 +226,14 @@ export default function App() {
             onFanSettled={() => setFanSettled(true)}
           />
 
-          {revealed.length < 3 && (
+          {revealed.length < totalCards && (
             <p className="next-hint">
               Touchez la carte de votre choix pour la retourner.
             </p>
           )}
 
           <TokenFeature
-            canReveal={revealed.length === 3}
+            canReveal={revealed.length === totalCards}
             tokenVisible={tokenVisible}
             token={draw.token}
             onReveal={() => setTokenVisible(true)}

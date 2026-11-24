@@ -9,7 +9,7 @@ interface CardsRevealFeatureProps {
   onFanSettled: () => void;
 }
 
-/** Les trois cartes et leur animation de révélation. */
+/** Les cartes du tirage et leur animation de révélation. */
 export default function CardsRevealFeature({
   cards,
   revealed,

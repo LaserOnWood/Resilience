@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import hits from '../src/data/hits.json';
 import zones from '../src/data/body-zones.json';
 import accessories from '../src/data/accessories.json';
+import furniture from '../src/data/furniture.json';
 import phrases from '../src/data/token-phrases.json';
 import { createDraw, drawToken, pickOne, validateData } from '../src/lib/game';
 
@@ -11,7 +12,7 @@ describe('Validation des données', () => {
   });
 
   it('conserve les groupes de cartes non vides avec des identifiants uniques', () => {
-    for (const group of [hits, zones, accessories]) {
+    for (const group of [hits, zones, accessories, furniture]) {
       expect(group.length).toBeGreaterThan(0);
       expect(new Set(group.map(card => card.id)).size).toBe(group.length);
     }
@@ -50,11 +51,11 @@ describe('pickOne', () => {
 });
 
 describe('Création d’un tirage', () => {
-  it('crée trois cartes dans le bon ordre et un jeton', () => {
+  it('crée quatre cartes dans le bon ordre et un jeton', () => {
     const draw = createDraw(() => 0);
 
-    expect(draw.cards).toHaveLength(3);
-    expect(draw.cards.map(card => card.category)).toEqual(['hits', 'body-zone', 'accessory']);
+    expect(draw.cards).toHaveLength(4);
+    expect(draw.cards.map(card => card.category)).toEqual(['hits', 'body-zone', 'accessory', 'furniture']);
     expect(draw.token).toEqual(phrases[0]);
     expect(draw.id).toBeTruthy();
     expect(Number.isNaN(Date.parse(draw.createdAt))).toBe(false);
@@ -66,6 +67,7 @@ describe('Création d’un tirage', () => {
     expect(draw.cards[0].id).toBe(hits[hits.length - 1].id);
     expect(draw.cards[1].id).toBe(zones[zones.length - 1].id);
     expect(draw.cards[2].id).toBe(accessories[accessories.length - 1].id);
+    expect(draw.cards[3].id).toBe(furniture[furniture.length - 1].id);
     expect(draw.token.id).toBe(phrases[phrases.length - 1].id);
   });
 

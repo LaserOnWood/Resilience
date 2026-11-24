@@ -8,13 +8,14 @@
 
 ## Concept
 
-Chaque booster contient trois cartes, révélées dans l'ordre choisi par les participants :
+Chaque booster contient quatre cartes, révélées dans l'ordre choisi par les participants :
 
 1. **Nombre de coups** : une valeur de 1 à 10.
 2. **Zone du corps** : choisie dans une liste prédéfinie excluant les zones sensibles.
 3. **Accessoire** : choisi dans une liste prédéfinie, comprenant **« Sans accessoire »**.
+4. **Meuble** : choisi dans une liste prédéfinie.
 
-Les trois cartes composent une proposition commune. Après leur révélation, un **jeton mystère** dévoile une courte phrase neutre indépendante des cartes. Il peut être relancé si les participants souhaitent une autre phrase. Les tirages sont aléatoires, les valeurs d'une même catégorie étant équiprobables. Les cartes n'ont pas de rareté, ne se modifient pas entre elles et ne comportent pas de règles d'incompatibilité.
+Les quatre cartes composent une proposition commune. Après leur révélation, un **jeton mystère** dévoile une courte phrase neutre indépendante des cartes. Il peut être relancé si les participants souhaitent une autre phrase. Les tirages sont aléatoires, les valeurs d'une même catégorie étant équiprobables. Les cartes n'ont pas de rareté, ne se modifient pas entre elles et ne comportent pas de règles d'incompatibilité.
 
 **Le consentement prévaut toujours sur le tirage :** chacun peut refuser, adapter ou interrompre une proposition, sans justification. L'application n'impose ni rôle, ni durée, ni nombre de participants.
 
@@ -23,9 +24,9 @@ Les trois cartes composent une proposition commune. Après leur révélation, un
 - Écran d'accueil bref, avec slogan et bouton de démarrage.
 - Avertissement 18+ et accès aux règles et informations de sécurité.
 - Booster unique, centré et légèrement animé, ouvert par clic ou toucher.
-- Animation de déchirure et apparition des trois cartes, puis du jeton ; séquence d'ouverture visée de 3 à 5 secondes.
+- Animation de déchirure et apparition des quatre cartes, puis du jeton ; séquence d'ouverture visée de 3 à 5 secondes.
 - Cartes présentées en éventail, avec dos commun ; chaque carte s'agrandit, se retourne et revient face visible à sa place.
-- Jeton accessible après révélation des trois cartes, avec rotation et effets lumineux.
+- Jeton accessible après révélation des quatre cartes, avec rotation et effets lumineux.
 - Récapitulatif final et possibilité d'ouvrir un nouveau booster, consulter l'historique ou quitter.
 - Option pour passer les animations ; niveaux **complètes / réduites / désactivées**, ainsi qu'un réglage du son.
 - Interface **mobile-first**, prioritairement en portrait, adaptée aussi aux tablettes et ordinateurs.
@@ -82,6 +83,7 @@ resilience/
 │   │   ├── hits.json
 │   │   ├── body-zones.json
 │   │   ├── accessories.json
+│   │   ├── furniture.json
 │   │   └── token-phrases.json
 │   ├── lib/
 │   ├── styles/
@@ -122,7 +124,7 @@ L'objectif est de disposer rapidement d'un parcours jouable, puis d'atteindre un
 - [ ] Initialiser React, TypeScript, Vite et le dépôt GitHub.
 - [ ] Définir les types de données, les JSON initiaux et leur validation.
 - [ ] Implémenter le tirage aléatoire et les règles de révélation.
-- [ ] Construire le parcours accueil → booster → trois cartes → jeton → récapitulatif.
+- [ ] Construire le parcours accueil → booster → quatre cartes → jeton → récapitulatif.
 - [ ] Utiliser des illustrations temporaires en attendant le choix artistique définitif.
 
 ### Phase 2 — Version jouable

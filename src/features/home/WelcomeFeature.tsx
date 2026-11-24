@@ -16,7 +16,7 @@ export default function WelcomeFeature({ historyCount, onStart, onHistory }: Wel
         sensations.
       </p>
       <p>
-        Trois cartes. Un jeton. <br />
+        Quatre cartes. Un jeton. <br />
         Une proposition que vous êtes toujours
         libres d'adapter ou de refuser.
       </p>

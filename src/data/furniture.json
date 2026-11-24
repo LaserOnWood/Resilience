@@ -1,0 +1,58 @@
+[
+  {
+    "id": "balançoire",
+    "name": "Balançoire",
+    "category": "furniture",
+    "description": "Meuble proposé, uniquement avec accord explicite.",
+    "image": "",
+    "value": "Balançoire"
+  },
+  {
+    "id": "bancAFessée",
+    "name": "Banc à fessée",
+    "category": "furniture",
+    "description": "Meuble proposé, uniquement avec accord explicite.",
+    "image": "",
+    "value": "Banc à fessée"
+  },
+  {
+    "id": "carcan",
+    "name": "Carcan",
+    "category": "furniture",
+    "description": "Meuble proposé, uniquement avec accord explicite.",
+    "image": "",
+    "value": "Carcan"
+  },
+  {
+    "id": "chaise",
+    "name": "Chaise",
+    "category": "furniture",
+    "description": "Meuble proposé, uniquement avec accord explicite.",
+    "image": "",
+    "value": "Chaise"
+  },
+  {
+    "id": "croixDeSaintAndré",
+    "name": "Croix de Saint-André",
+    "category": "furniture",
+    "description": "Meuble proposé, uniquement avec accord explicite.",
+    "image": "",
+    "value": "Croix de Saint-André"
+  },
+  {
+    "id": "Pilori",
+    "name": "Pilori",
+    "category": "furniture",
+    "description": "Meuble proposé, uniquement avec accord explicite.",
+    "image": "",
+    "value": "Pilori"
+  },
+  {
+    "id": "poutreDeSuspension",
+    "name": "Poutre de suspension",
+    "category": "furniture",
+    "description": "Meuble proposé, uniquement avec accord explicite.",
+    "image": "",
+    "value": "Poutre de suspension"
+  }
+]

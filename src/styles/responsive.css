@@ -42,17 +42,15 @@
   }
 }
 
-@media (max-width: 540px) {
+/* Quatre cartes : grille 2 × 2 dès que la place manque pour 4 colonnes. */
+@media (max-width: 720px) {
   .cards {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0.75rem;
   }
+}
 
-  .game-card:last-child {
-    grid-column: 1 / -1;
-    width: calc((100% - 0.75rem) / 2);
-    justify-self: center;
-  }
+@media (max-width: 540px) {
 
   .card-frame {
     padding: 0.5rem;
@@ -73,7 +71,8 @@
 
   .card-number .card-name,
   .card-zone .card-name,
-  .card-accessory .card-name {
+  .card-accessory .card-name,
+  .card-furniture .card-name {
     font-size: clamp(1rem, 5vw, 1.6rem);
   }
 
@@ -118,12 +117,6 @@
     transform: translateY(-3px);
   }
 
-  .cards-emergence.cards-flat > .game-card:last-child {
-    grid-column: 1 / -1 !important;
-    width: calc((100% - 0.75rem) / 2);
-    justify-self: center;
-  }
-
   .cards-emergence.cards-flat .card-name,
   .cards-emergence.cards-flat .card-description,
   .cards-emergence.cards-flat .card-category,
@@ -153,27 +146,36 @@
   .cards-emergence .game-card:nth-child(1) {
     --card-start-x: -90%;
     --card-rotation: -18deg;
-    --card-end-x: clamp(-62px, -14vw, -42px);
-    --card-end-rotation: -14deg;
+    --card-end-x: clamp(-70px, -17vw, -54px);
+    --card-end-rotation: -15deg;
     z-index: 1;
     transform: translate(var(--card-end-x), 0) rotate(var(--card-end-rotation));
   }
 
   .cards-emergence .game-card:nth-child(2) {
-    --card-start-x: 0%;
-    --card-rotation: 0deg;
-    --card-end-x: 0px;
-    --card-end-rotation: 0deg;
-    z-index: 3;
+    --card-start-x: -30%;
+    --card-rotation: -6deg;
+    --card-end-x: clamp(-24px, -6vw, -18px);
+    --card-end-rotation: -5deg;
+    z-index: 2;
     transform: translate(var(--card-end-x), 0) rotate(var(--card-end-rotation));
   }
 
   .cards-emergence .game-card:nth-child(3) {
+    --card-start-x: 30%;
+    --card-rotation: 6deg;
+    --card-end-x: clamp(18px, 6vw, 24px);
+    --card-end-rotation: 5deg;
+    z-index: 3;
+    transform: translate(var(--card-end-x), 0) rotate(var(--card-end-rotation));
+  }
+
+  .cards-emergence .game-card:nth-child(4) {
     --card-start-x: 90%;
     --card-rotation: 18deg;
-    --card-end-x: clamp(42px, 14vw, 62px);
-    --card-end-rotation: 14deg;
-    z-index: 2;
+    --card-end-x: clamp(54px, 17vw, 70px);
+    --card-end-rotation: 15deg;
+    z-index: 4;
     transform: translate(var(--card-end-x), 0) rotate(var(--card-end-rotation));
   }
 
@@ -182,10 +184,11 @@
     transform: translate(var(--card-end-x), -8px) rotate(var(--card-end-rotation));
   }
 
-  /* Après l'éventail, annule aussi les rotations spécifiques aux cartes 1, 2 et 3. */
+  /* Après l'éventail, annule aussi les rotations spécifiques aux cartes 1 à 4. */
   .cards-emergence.cards-flat .game-card:nth-child(1),
   .cards-emergence.cards-flat .game-card:nth-child(2),
-  .cards-emergence.cards-flat .game-card:nth-child(3) {
+  .cards-emergence.cards-flat .game-card:nth-child(3),
+  .cards-emergence.cards-flat .game-card:nth-child(4) {
     transform: none;
     rotate: none;
   }
@@ -199,10 +202,6 @@
 
   .cards-emergence.cards-flat {
     gap: 0.45rem;
-  }
-
-  .cards-emergence.cards-flat > .game-card:last-child {
-    width: calc((100% - 0.45rem) / 2);
   }
 
   .cards-emergence .game-card,

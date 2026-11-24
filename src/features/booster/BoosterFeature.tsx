@@ -57,7 +57,7 @@ export default function BoosterFeature({
       <small>
         {opening
           ? 'Préparez-vous à découvrir vos cartes.'
-          : 'Trois cartes vous attendent à l’intérieur.'}
+          : 'Quatre cartes vous attendent à l’intérieur.'}
       </small>
     </section>
   );
