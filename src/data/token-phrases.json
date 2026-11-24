@@ -1,26 +1,103 @@
 [
   {
     "id": "token-1",
-    "text": "Prenez le temps de vous accorder."
+    "text": "Divise par 2 le nombre de coups à recevoir"
   },
   {
     "id": "token-2",
-    "text": "Une pause peut toujours être choisie."
+    "text": "Multiplie par 2 le nombre de coups à recevoir"
   },
   {
     "id": "token-3",
-    "text": "À vous de décider ensemble."
+    "text": "Multiplie par 3 le nombre de coups à recevoir"
   },
   {
     "id": "token-4",
-    "text": "Le consentement reste prioritaire."
+    "text": "La zone de corps change au choix du Bottom"
   },
   {
     "id": "token-5",
-    "text": "Le respect de l'autre est essentiel."
+    "text": "La zone de corps change au choix du Top"
   },
   {
     "id": "token-6",
-    "text": "La communication est la clé d'une expérience positive."
+    "text": "Partage de la punition"
+  },
+  {
+    "id": "token-7",
+    "text": "Donne ta punition"
+  },
+  {
+    "id": "token-8",
+    "text": "Changement de main"
+  },
+  {
+    "id": "token-9",
+    "text": "Les yeux sont couvert"
+  },
+  {
+    "id": "token-10",
+    "text": "La bouche et couverte/baîlonner"
+  },
+  {
+    "id": "token-11",
+    "text": "Les mains sont liées"
+  },
+  {
+    "id": "token-12",
+    "text": "Inversion des rôles"
+  },
+  {
+    "id": "token-13",
+    "text": "Relance Piece"
+  },
+  {
+    "id": "token-14",
+    "text": "Relance Nombre"
+  },
+  {
+    "id": "token-15",
+    "text": "Relance Corps"
+  },
+  {
+    "id": "token-16",
+    "text": "Relance Accessoire"
+  },
+  {
+    "id": "token-17",
+    "text": "Le Dom compte les coups"
+  },
+  {
+    "id": "token-18",
+    "text": "Le sub compte les coups"
+  },
+  {
+    "id": "token-19",
+    "text": "Ne touche pas la partie du corps impacter"
+  },
+  {
+    "id": "token-20",
+    "text": "Relance ton epreuve apres avoir completer celle ci"
+  },
+  {
+    "id": "token-21",
+    "text": "Ajoute 20 au nombre de coups a recevoir"
+  },
+  {
+    "id": "token-22",
+    "text": "Ajoute 50 au nombre de coups a recevoir"
+  },
+  {
+    "id": "token-23",
+    "text": "Retire 10 au nombre de coups a recevoir"
+  },
+  {
+    "id": "token-24",
+    "text": "Retire 20 au nombre de coups a recevoir"
+  },
+  {
+    "id": "token-25",
+    "text": "Tu peux soit garder la caisse sans malus, soit relancer la caisse."
   }
 ]
+
